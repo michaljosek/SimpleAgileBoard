@@ -101,6 +101,21 @@ namespace Boilerplate.Controllers
             return Ok(note);
         }
 
+        [Route("deleteNote")]
+        [HttpPost]
+        public IActionResult DeleteNotee(DeleteNote deleteNote)
+        {
+            var note = _dbContext.Notes
+                .FirstOrDefault(x => x.NoteId == deleteNote.NoteId);
+            
+            _dbContext.Notes.Remove(note);
+            _dbContext.SaveChanges();
+
+            var board = GetBoard(deleteNote.BoardId);
+
+            return Ok(board);
+        }
+
         private Board GetBoard(int boardId)
         {
             var board = _dbContext.Boards
@@ -127,6 +142,13 @@ namespace Boilerplate.Controllers
             public int LaneId { get; set; }
             public string Title { get; set; }
             public string Description { get; set; }
+        }
+
+        public class DeleteNote
+        {
+            public int NoteId { get; set; }
+
+            public int BoardId { get; set; }
         }
     }
 }

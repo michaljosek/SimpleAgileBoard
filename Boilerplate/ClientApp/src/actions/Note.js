@@ -1,16 +1,8 @@
 import * as types from './type.js'
 import apiFetch from '../services/apiFetch';
+import * as Board from './Board';
 
-export const boardActionsCreators = {
-    getBoard: (boardId) => {
-        return (dispatch, getState) => {
-            fetch(`api/board/getBoard/` + boardId)
-                   .then(response => response.json())
-                   .then(data => {
-                       dispatch(setBoard(types.SET_BOARD, data));
-                   });
-           }
-        },
+export const noteActionsCreators = {
         addNote: (event) => {
             const title = event.target.form.elements.formAddNoteTitle.value;
             const description = event.target.form.elements.formAddNoteDescription.value;
@@ -19,7 +11,7 @@ export const boardActionsCreators = {
             return (dispatch, getState) => {
                 apiFetch('api/board/addNote', dispatch, { laneId, title, description })
                 .then(data => {
-                    dispatch(setBoard(types.SET_BOARD, data));
+                    dispatch(Board.setBoard(types.SET_BOARD, data));
                 });
                }
         },
@@ -27,16 +19,13 @@ export const boardActionsCreators = {
             return (dispatch, getState) => {
                 apiFetch('api/board/deleteNote/', dispatch, { noteId, boardId }, 'POST')
                 .then(data => {
-                    dispatch(setBoard(types.SET_BOARD, data));
+                    dispatch(Board.setBoard(types.SET_BOARD, data));
                 });
             }
-        }
+        },
+        test: () => {
+            return (dispatch, getState) => {
+                alert(':)');
+            }
+        },
     }
-
-
-export const setBoard = (type, data) => {
-    return {
-        type: type,
-        data: data,
-    }
-}

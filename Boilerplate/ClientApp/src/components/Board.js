@@ -9,7 +9,10 @@ import Lane from './Lane';
 class Board extends React.PureComponent {
     constructor(props){
         super(props);
-        this.state = { addNoteShow: false };
+        this.state = { 
+            addNoteShow: false,
+            noteShow: false
+        };
     }
 
     componentDidMount() {
@@ -23,6 +26,12 @@ class Board extends React.PureComponent {
         })
     }
 
+    handleNoteShowModalClick = () => {
+        this.setState({ 
+            noteShow: !this.state.noteShow 
+        })
+    }
+
     addNote = (e) => {
         this.props.addNote(e);
         this.handleModalClick();
@@ -32,15 +41,19 @@ class Board extends React.PureComponent {
         return (
             <div>
                 {this.props.name}
+
+                <button onClick={this.handleModalClick}>Add note</button>
+
                 {this.props.lanes.map(lane =>
                     <Lane 
                       key={lane.laneId}
                       lane={lane}
                       addNote={this.props.addNote}
+                      boardId={this.props.boardId}
+                      noteModal={this.handleNoteShowModalClick}
                     />
                 )}
 
-                <button onClick={this.handleModalClick}>Add note</button>
                 <AddNoteModal 
                     isOpen={this.state.addNoteShow}
                     handleModalClick={this.handleModalClick}

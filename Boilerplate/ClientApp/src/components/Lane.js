@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Note from './Note';
 
-const Lane = ({ lane, addNote }) => {
+const Lane = ({ lane, boardId }) => {
     return (
         <React.Fragment>
             <div>
@@ -13,6 +13,7 @@ const Lane = ({ lane, addNote }) => {
                         <Note 
                             key={note.noteId}
                             note={note}
+                            boardId={boardId}
                         />
                     )}
             </div>
@@ -22,7 +23,7 @@ const Lane = ({ lane, addNote }) => {
   
 Lane.propTypes = {
     lane: PropTypes.object.isRequired,
-    addNote: PropTypes.func.isRequired,
+    boardId: PropTypes.number.isRequired,
 }
 
 export default Lane;
