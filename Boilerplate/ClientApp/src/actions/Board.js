@@ -7,7 +7,6 @@ export const boardActionsCreators = {
             fetch(`api/board/getBoard/` + boardId)
                    .then(response => response.json())
                    .then(data => {
-                       console.log(data);
                        dispatch(setBoard(types.SET_BOARD, data));
                    });
            }
@@ -19,7 +18,6 @@ export const boardActionsCreators = {
             return (dispatch, getState) => {
                 apiFetch('api/board/addNote', dispatch, { laneId, title, description })
                 .then(data => {
-                    console.log(data);
                     dispatch(setBoard(types.SET_BOARD, data));
                 });
                }

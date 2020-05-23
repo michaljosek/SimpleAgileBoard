@@ -1,12 +1,3 @@
-﻿// counter
-export const INCREMENT_COUNT = 'INCREMENT_COUNT';
-export const DECREMENT_COUNT = 'DECREMENT_COUNT'
-
-//wheatherForecasts
-
-export const REQUEST_WEATHER_FORECASTS ='REQUEST_WEATHER_FORECASTS'
-export const RECEIVE_WEATHER_FORECASTS ='RECEIVE_WEATHER_FORECASTS'
-
-//board
+﻿//board
 
 export const SET_BOARD ='SET_BOARD'
