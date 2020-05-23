@@ -69,10 +69,16 @@ namespace Boilerplate.Controllers
 
         [Route("addNote")]
         [HttpPost]
-        public IActionResult Add(AddNote note)
+        public IActionResult Add(AddNote addNote)
         {
-            var lane = GetLane(note.LaneId);
-            lane.Notes.Add(note.Note);
+            var lane = GetLane(addNote.LaneId);
+            var note = new Note
+            {
+                Title = addNote.Title,
+                Description = addNote.Description
+            };
+
+            lane.Notes.Add(note);
 
             _dbContext.Update(lane);
             _dbContext.SaveChanges();
@@ -119,7 +125,8 @@ namespace Boilerplate.Controllers
         public class AddNote
         {
             public int LaneId { get; set; }
-            public Note Note { get; set; }
+            public string Title { get; set; }
+            public string Description { get; set; }
         }
     }
 }

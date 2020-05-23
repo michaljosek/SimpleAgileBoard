@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Note from './Note';
+import AddNote from './AddNote';
 
-const Lane = ({ lane }) => {
+const Lane = ({ lane, addNote }) => {
     return (
         <React.Fragment>
             <div>
@@ -15,13 +16,18 @@ const Lane = ({ lane }) => {
                             note={note}
                         />
                     )}
+                    <AddNote 
+                        onSubmit={() => addNote(lane.laneId)} 
+                        laneId={lane.laneId}
+                    />
             </div>
         </React.Fragment>
     );
   }
   
 Lane.propTypes = {
-    lane: PropTypes.object.isRequired
+    lane: PropTypes.object.isRequired,
+    addNote: PropTypes.func.isRequired,
 }
 
 export default Lane;

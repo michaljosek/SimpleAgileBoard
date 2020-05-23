@@ -1,4 +1,6 @@
 import * as types from './type.js'
+import apiFetch from '../services/apiFetch';
+
 export const boardActionsCreators = {
     getBoard: (boardId) => {
         return (dispatch, getState) => {
@@ -9,10 +11,23 @@ export const boardActionsCreators = {
                        dispatch(setBoard(types.SET_BOARD, data));
                    });
            }
-        }
+        },
+        addNote: (laneId) => {
+            const title = ':)';
+            const description = ':))';
+
+            return (dispatch, getState) => {
+                apiFetch('api/board/addNote', dispatch, { laneId, title, description })
+                .then(data => {
+                    console.log(data);
+                    dispatch(setBoard(types.SET_BOARD, data));
+                });
+               }
+            }
     }
 
-const setBoard = (type, data) => {
+
+export const setBoard = (type, data) => {
     return {
         type: type,
         data: data,

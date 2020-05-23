@@ -20,6 +20,7 @@ class Board extends React.PureComponent {
                     <Lane 
                       key={lane.laneId}
                       lane={lane}
+                      addNote={this.props.addNote}
                     />
                 )}
             </div>
