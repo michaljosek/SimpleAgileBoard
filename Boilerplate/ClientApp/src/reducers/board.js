@@ -12,7 +12,7 @@ export const board = createReducer(unloadedState, {
         if (state === undefined) {
             return unloadedState;
         }
-        
+
         var data = action.data;
         return {
             boardId: data.boardId,
@@ -22,3 +22,5 @@ export const board = createReducer(unloadedState, {
     }
 });
 
+
+export default unloadedState;

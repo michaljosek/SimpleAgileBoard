@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Note from './Note';
-import AddNote from './AddNote';
 
 const Lane = ({ lane, addNote }) => {
     return (
@@ -16,10 +15,6 @@ const Lane = ({ lane, addNote }) => {
                             note={note}
                         />
                     )}
-                    <AddNote 
-                        onSubmit={() => addNote(lane.laneId)} 
-                        laneId={lane.laneId}
-                    />
             </div>
         </React.Fragment>
     );

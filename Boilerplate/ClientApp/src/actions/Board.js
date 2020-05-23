@@ -11,9 +11,10 @@ export const boardActionsCreators = {
                    });
            }
         },
-        addNote: (laneId) => {
-            const title = ':)';
-            const description = ':))';
+        addNote: (event) => {
+            const title = event.target.form.elements.formAddNoteTitle.value;
+            const description = event.target.form.elements.formAddNoteDescription.value;
+            const laneId = Number(event.target.form.elements.formAddNoteLaneId.value);
 
             return (dispatch, getState) => {
                 apiFetch('api/board/addNote', dispatch, { laneId, title, description })

@@ -1,15 +1,31 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux';
+import { boardActionsCreators } from '../actions/Board';
 
-import { boardActionsCreators } from '../actions/Board'
-
-import Lane from './Lane'
+import AddNoteModal from './AddNoteModal';
+import Lane from './Lane';
 
 class Board extends React.PureComponent {
+    constructor(props){
+        super(props);
+        this.state = { addNoteShow: false };
+    }
+
     componentDidMount() {
         const boardId = parseInt(this.props.match.params.boardId, 10) || 0;
         this.props.getBoard(boardId);
+    }
+    
+    handleModalClick = () => {
+        this.setState({ 
+            addNoteShow: !this.state.addNoteShow 
+        })
+    }
+
+    addNote = (e) => {
+        this.props.addNote(e);
+        this.handleModalClick();
     }
 
     render() {
@@ -23,6 +39,14 @@ class Board extends React.PureComponent {
                       addNote={this.props.addNote}
                     />
                 )}
+
+                <button onClick={this.handleModalClick}>Add note</button>
+                <AddNoteModal 
+                    isOpen={this.state.addNoteShow}
+                    handleModalClick={this.handleModalClick}
+                    addNote={this.addNote}
+                    lanes={this.props.lanes}
+                />
             </div>
         );
       }
