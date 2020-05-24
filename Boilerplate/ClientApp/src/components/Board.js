@@ -10,8 +10,8 @@ class Board extends React.PureComponent {
     constructor(props){
         super(props);
         this.state = { 
-            addNoteShow: false,
-            noteShow: false
+            isAddNoteModalOpen: false,
+            isDetailsNoteModalOpen: false
         };
     }
 
@@ -20,48 +20,49 @@ class Board extends React.PureComponent {
         this.props.getBoard(boardId);
     }
     
-    handleModalClick = () => {
+    handleAddNoteModal = () => {
         this.setState({ 
-            addNoteShow: !this.state.addNoteShow 
+            isAddNoteModalOpen: !this.state.isAddNoteModalOpen 
         })
     }
 
-    handleNoteShowModalClick = () => {
+    handleDetailsNoteModal = () => {
         this.setState({ 
-            noteShow: !this.state.noteShow 
+            isDetailsNoteModalOpen: !this.state.isDetailsNoteModalOpen 
         })
     }
 
     addNote = (e) => {
         this.props.addNote(e);
-        this.handleModalClick();
+        this.handleAddNoteModal();
     }
 
     render() {
         return (
             <div>
                 {this.props.name}
-                <button onClick={this.handleModalClick}>Add note</button>
+                <button onClick={this.handleAddNoteModal}>Add note</button>
                 <div className="container">
-                    <div class="row">
-                {this.props.lanes.map(lane =>
-                    <Lane 
-                      key={lane.laneId}
-                      lane={lane}
-                      addNote={this.props.addNote}
-                      boardId={this.props.boardId}
-                      noteModal={this.handleNoteShowModalClick}
-                    />
-                )}
-
-                <AddNoteModal 
-                    isOpen={this.state.addNoteShow}
-                    handleModalClick={this.handleModalClick}
-                    addNote={this.addNote}
-                    lanes={this.props.lanes}
-                />
-            </div>         
-            </div></div>   
+                    <div className="row">
+                        {this.props.lanes.map(lane =>
+                            <Lane 
+                            key={lane.laneId}
+                            lane={lane}
+                            addNote={this.props.addNote}
+                            boardId={this.props.boardId}
+                            isDetailsNoteModalOpen={this.state.isDetailsNoteModalOpen}
+                            detailsNoteModal={this.handleDetailsNoteModal}
+                            />
+                        )}
+                        <AddNoteModal 
+                            isAddNoteModalOpen={this.state.isAddNoteModalOpen}
+                            addNoteModal={this.handleAddNoteModal}
+                            addNote={this.addNote}
+                            lanes={this.props.lanes}
+                        />
+                    </div>         
+                </div>
+            </div>   
         );
       }
 }

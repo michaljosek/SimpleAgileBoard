@@ -3,10 +3,10 @@ import Modal from "react-modal"
 import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
 
-const AddNoteModal = ({ isOpen, handleModalClick, addNote, lanes }) =>
+const AddNoteModal = ({ isAddNoteModalOpen, addNoteModal, addNote, lanes }) =>
   <Modal
-    isOpen={isOpen}
-    handleModalClick={handleModalClick}
+    isOpen={isAddNoteModalOpen}
+    handleModalClick={addNoteModal}
     contentLabel="Modal"
     shouldCloseOnOverlayClick={true}
     ariaHideApp={false}
@@ -29,13 +29,13 @@ const AddNoteModal = ({ isOpen, handleModalClick, addNote, lanes }) =>
             <Form.Control type="text" />
         </Form.Group>
         <button onClick={addNote}>Add</button>
-        <button onClick={handleModalClick}>Close</button>
+        <button onClick={addNoteModal}>Close</button>
     </Form>
   </Modal>
 
 AddNoteModal.propTypes = {
-    isOpen: PropTypes.bool.isRequired,
-    handleModalClick: PropTypes.func.isRequired,
+    isAddNoteModalOpen: PropTypes.bool.isRequired,
+    addNoteModal: PropTypes.func.isRequired,
     addNote: PropTypes.func.isRequired,
     lanes: PropTypes.arrayOf(PropTypes.object).isRequired,
   }
