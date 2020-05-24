@@ -6,11 +6,6 @@ const Lane = ({ lane, boardId }) => {
     return (
         <React.Fragment>
             <div>
-            <div className="col-md-3 panelspace">
-        <div className="panel panel-primary">
-          <div className="panel-heading">In Progress</div>
-          <div className="panel-body">
-            <ul className="list-group">
                 <h2>
                     {lane.name}
                 </h2>
@@ -21,10 +16,6 @@ const Lane = ({ lane, boardId }) => {
                             boardId={boardId}
                         />
                     )}
-                    </ul>
-          </div>
-        </div>
-      </div>
             </div>
         </React.Fragment>
     );
