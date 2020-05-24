@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { boardActionsCreators } from '../actions/Board';
 
 import AddNoteModal from './AddNoteModal';
+import DetailsNoteModal from './DetailsNoteModal';
 import Lane from './Lane';
 
 class Board extends React.PureComponent {
@@ -11,7 +12,8 @@ class Board extends React.PureComponent {
         super(props);
         this.state = { 
             isAddNoteModalOpen: false,
-            isDetailsNoteModalOpen: false
+            isDetailsNoteModalOpen: false,
+            detailsNote: {}
         };
     }
 
@@ -26,9 +28,10 @@ class Board extends React.PureComponent {
         })
     }
 
-    handleDetailsNoteModal = () => {
+    handleDetailsNoteModal = (note) => {
         this.setState({ 
-            isDetailsNoteModalOpen: !this.state.isDetailsNoteModalOpen 
+            detailsNote: note,
+            isDetailsNoteModalOpen: !this.state.isDetailsNoteModalOpen
         })
     }
 
@@ -46,19 +49,24 @@ class Board extends React.PureComponent {
                     <div className="row">
                         {this.props.lanes.map(lane =>
                             <Lane 
-                            key={lane.laneId}
-                            lane={lane}
-                            addNote={this.props.addNote}
-                            boardId={this.props.boardId}
-                            isDetailsNoteModalOpen={this.state.isDetailsNoteModalOpen}
-                            detailsNoteModal={this.handleDetailsNoteModal}
+                                key={lane.laneId}
+                                lane={lane}
+                                addNote={this.props.addNote}
+                                boardId={this.props.boardId}
+                                detailsNoteModal={this.handleDetailsNoteModal}
                             />
                         )}
+                        
                         <AddNoteModal 
                             isAddNoteModalOpen={this.state.isAddNoteModalOpen}
                             addNoteModal={this.handleAddNoteModal}
                             addNote={this.addNote}
                             lanes={this.props.lanes}
+                        />
+                        <DetailsNoteModal 
+                            isDetailsNoteModalOpen={this.state.isDetailsNoteModalOpen}
+                            detailsNoteModal={this.handleDetailsNoteModal}
+                            note={this.state.detailsNote}
                         />
                     </div>         
                 </div>

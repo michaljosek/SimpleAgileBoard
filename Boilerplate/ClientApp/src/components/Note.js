@@ -13,6 +13,9 @@ class Note extends React.PureComponent {
         this.props.deleteNote(this.props.note.noteId, this.props.boardId);
     }
 
+    triggerDetailsNoteModal = () => {
+        this.props.detailsNoteModal(this.props.note);
+    }
 
     render() { 
         return(
@@ -20,21 +23,16 @@ class Note extends React.PureComponent {
                 <div>
                     <div className="card">
                         <div className="card-body">
-                            <h5 className="card-title">{this.props.note.noteId}</h5>
-                            <p className="card-text">{this.props.note.noteId}</p>
+                            <h5 className="card-title">{this.props.note.noteBoardId}</h5>
+                            <p className="card-text">{this.props.note.title}</p>
                             <div className="pull-right action-buttons">
                                 <FontAwesomeIcon icon={faArrowUp} />
                                 <FontAwesomeIcon icon={faArrowDown} />
 
-                                <button onClick={this.props.detailsNoteModal}>
+                                <button onClick={this.triggerDetailsNoteModal}>
                                     <FontAwesomeIcon icon={faInfoCircle}/>
                                 </button>
-                                <DetailsNoteModal 
-                                    isDetailsNoteModalOpen={this.props.isDetailsNoteModalOpen}
-                                    detailsNoteModal={this.props.detailsNoteModal}
-                                    note={this.props.note}
-                                />
-
+                                
                                 <FontAwesomeIcon icon={faEdit}/>
                                 
                                 <button onClick={this.deleteNote}>
