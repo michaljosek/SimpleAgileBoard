@@ -42,7 +42,8 @@ class Board extends React.PureComponent {
             <div>
                 {this.props.name}
                 <button onClick={this.handleModalClick}>Add note</button>
-
+                <div className="container">
+                    <div class="row">
                 {this.props.lanes.map(lane =>
                     <Lane 
                       key={lane.laneId}
@@ -59,7 +60,8 @@ class Board extends React.PureComponent {
                     addNote={this.addNote}
                     lanes={this.props.lanes}
                 />
-            </div>            
+            </div>         
+            </div></div>   
         );
       }
 }

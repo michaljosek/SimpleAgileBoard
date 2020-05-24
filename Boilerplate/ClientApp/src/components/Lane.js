@@ -5,18 +5,18 @@ import Note from './Note';
 const Lane = ({ lane, boardId }) => {
     return (
         <React.Fragment>
-            <div>
-                <h2>
-                    {lane.name}
-                </h2>
-                    {lane.notes.map(note => 
-                        <Note 
-                            key={note.noteId}
-                            note={note}
-                            boardId={boardId}
-                        />
-                    )}
-            </div>
+            <div className="col-md-3">
+                <ul className="list-group">
+                        <li className="list-group-item active">{lane.name}</li>
+                        {lane.notes.map(note => 
+                            <Note 
+                                key={note.noteId}
+                                note={note}
+                                boardId={boardId}
+                            />
+                        )}
+                    </ul>
+                </div>
         </React.Fragment>
     );
   }
