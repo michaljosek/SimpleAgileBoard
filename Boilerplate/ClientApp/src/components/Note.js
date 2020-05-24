@@ -8,8 +8,8 @@ class Note extends React.PureComponent {
 
     render() { 
         return(
-        <React.Fragment>
-              <div>
+            <li className="list-group-item">
+               <div>
                 <h2>
                     {this.props.note.noteId}
                     {this.props.note.title}
@@ -18,7 +18,7 @@ class Note extends React.PureComponent {
                     <button onClick={() => this.props.deleteNote(this.props.note.noteId, 1)}>Delete</button>
 
             </div>
-        </React.Fragment>
+              </li>
     )};  
 }
 
