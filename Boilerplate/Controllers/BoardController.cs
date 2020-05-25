@@ -116,6 +116,24 @@ namespace Boilerplate.Controllers
             return Ok(board);
         }
 
+        [Route("editNote")]
+        [HttpPost]
+        public IActionResult EditNotee(EditNote editNote)
+        {
+            var note = _dbContext.Notes
+                .FirstOrDefault(x => x.NoteId == editNote.NoteId);
+
+            note.Title = editNote.Title;
+            note.Description = editNote.Description;
+
+            _dbContext.Notes.Update(note);
+            _dbContext.SaveChanges();
+
+            var board = GetBoard(editNote.BoardId);
+
+            return Ok(board);
+        }
+
         private Board GetBoard(int boardId)
         {
             var board = _dbContext.Boards
@@ -149,6 +167,14 @@ namespace Boilerplate.Controllers
             public int NoteId { get; set; }
 
             public int BoardId { get; set; }
+        }
+
+        public class EditNote
+        {
+            public int BoardId { get; set; }
+            public int NoteId { get; set; }
+            public string Title { get; set; }
+            public string Description { get; set; }
         }
     }
 }

@@ -30,6 +30,18 @@ export const boardActionsCreators = {
                     dispatch(setBoard(types.SET_BOARD, data));
                 });
             }
+        },
+        editNote: (event, boardId) => {
+            const title = event.target.form.elements.formEditNoteTitle.value;
+            const description = event.target.form.elements.formEditNoteDescription.value;
+            const noteId = Number(event.target.form.elements.formEditNoteNoteId.value);
+
+            return (dispatch, getState) => {
+                apiFetch('api/board/editNote', dispatch, { boardId, noteId, title, description })
+                .then(data => {
+                    dispatch(setBoard(types.SET_BOARD, data));
+                });
+               }
         }
     }
 

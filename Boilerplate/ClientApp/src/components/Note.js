@@ -17,6 +17,14 @@ class Note extends React.PureComponent {
         this.props.detailsNoteModal(this.props.note);
     }
 
+    detailsNoteModal = () => {
+        this.props.detailsNoteModal(this.props.note);
+    }
+
+    editNoteModal = () => {
+        this.props.editNoteModal(this.props.note);
+    }
+
     render() { 
         return(
             <li className="list-group-item">
@@ -29,11 +37,13 @@ class Note extends React.PureComponent {
                                 <FontAwesomeIcon icon={faArrowUp} />
                                 <FontAwesomeIcon icon={faArrowDown} />
 
-                                <button onClick={this.triggerDetailsNoteModal}>
+                                <button onClick={this.detailsNoteModal}>
                                     <FontAwesomeIcon icon={faInfoCircle}/>
                                 </button>
-                                
-                                <FontAwesomeIcon icon={faEdit}/>
+
+                                <button onClick={this.editNoteModal}>
+                                    <FontAwesomeIcon icon={faEdit}/>
+                                </button>
                                 
                                 <button onClick={this.deleteNote}>
                                     <FontAwesomeIcon icon={faTrash}/>

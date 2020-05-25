@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Note from './Note';
 
-const Lane = ({ lane, boardId, detailsNoteModal }) => {
+const Lane = ({ lane, boardId, detailsNoteModal, editNoteModal }) => {
     return (
         <React.Fragment>
             <div className="col-md-4">
@@ -14,6 +14,7 @@ const Lane = ({ lane, boardId, detailsNoteModal }) => {
                                 note={note}
                                 boardId={boardId}
                                 detailsNoteModal={detailsNoteModal}
+                                editNoteModal={editNoteModal}
                             />
                         )}
                     </ul>
@@ -25,7 +26,8 @@ const Lane = ({ lane, boardId, detailsNoteModal }) => {
 Lane.propTypes = {
     lane: PropTypes.object.isRequired,
     boardId: PropTypes.number.isRequired,
-    detailsNoteModal: PropTypes.func.isRequired
+    detailsNoteModal: PropTypes.func.isRequired,
+    editNoteModal: PropTypes.func.isRequired
 }
 
 export default Lane;

@@ -5,7 +5,14 @@ import { boardActionsCreators } from '../actions/Board';
 
 import AddNoteModal from './AddNoteModal';
 import DetailsNoteModal from './DetailsNoteModal';
+import EditNoteModal from './EditNoteModal';
 import Lane from './Lane';
+
+const emptyNote = {
+    noteBoardId: "",
+    title: "",
+    description: ""
+}
 
 class Board extends React.PureComponent {
     constructor(props){
@@ -13,7 +20,9 @@ class Board extends React.PureComponent {
         this.state = { 
             isAddNoteModalOpen: false,
             isDetailsNoteModalOpen: false,
-            detailsNote: {}
+            isEditNoteModalOpen: false,
+            detailsNote: emptyNote,
+            editNote: emptyNote
         };
     }
 
@@ -35,9 +44,21 @@ class Board extends React.PureComponent {
         })
     }
 
+    handleEditNoteModal = (note) => {
+        this.setState({ 
+            editNote: note,
+            isEditNoteModalOpen: !this.state.isEditNoteModalOpen
+        })
+    }
+
     addNote = (e) => {
         this.props.addNote(e);
         this.handleAddNoteModal();
+    }
+
+    editNoteUpdate = (e) => {
+        this.props.editNote(e, this.props.boardId);
+        this.handleEditNoteModal(emptyNote);
     }
 
     render() {
@@ -54,9 +75,10 @@ class Board extends React.PureComponent {
                                 addNote={this.props.addNote}
                                 boardId={this.props.boardId}
                                 detailsNoteModal={this.handleDetailsNoteModal}
+                                editNoteModal={this.handleEditNoteModal}
                             />
                         )}
-                        
+
                         <AddNoteModal 
                             isAddNoteModalOpen={this.state.isAddNoteModalOpen}
                             addNoteModal={this.handleAddNoteModal}
@@ -66,7 +88,13 @@ class Board extends React.PureComponent {
                         <DetailsNoteModal 
                             isDetailsNoteModalOpen={this.state.isDetailsNoteModalOpen}
                             detailsNoteModal={this.handleDetailsNoteModal}
-                            note={this.state.detailsNote}
+                            detailsNote={this.state.detailsNote}
+                        />
+                        <EditNoteModal 
+                            isEditNoteModalOpen={this.state.isEditNoteModalOpen}
+                            editNoteModal={this.handleEditNoteModal}
+                            editNote={this.state.editNote}
+                            editNoteUpdate={this.editNoteUpdate}
                         />
                     </div>         
                 </div>
