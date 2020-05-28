@@ -41,7 +41,15 @@ export const boardActionsCreators = {
                 .then(data => {
                     dispatch(setBoard(types.SET_BOARD, data));
                 });
-               }
+            }
+        },
+        moveNote: (noteIndex, laneId, boardId, moveUp) => {
+            return (dispatch, getState) => {
+                apiFetch('api/board/moveNote', dispatch, { noteIndex, laneId, boardId, moveUp })
+                .then(data => {
+                    dispatch(setBoard(types.SET_BOARD, data));
+                });
+            }
         }
     }
 

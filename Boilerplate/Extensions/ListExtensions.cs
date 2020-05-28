@@ -8,20 +8,20 @@ namespace Boilerplate.Extensions
 {
     public static class ListExtensions
     {
-        public static void MoveUp<T>(this IList<T> list, int indexToMove) where T : ISortIndex
-        {
-            Move(list, indexToMove, MoveDirection.Up);
-        }
-
-        public static void MoveDown<T>(this IList<T> list, int indexToMove) where T : ISortIndex
-        {
-            Move(list, indexToMove, MoveDirection.Down);
-        }
+        // public static void MoveUp<T>(this IList<T> list, int indexToMove) where T : ISortIndex
+        // {
+        //     Move(list, indexToMove, MoveDirection.Up);
+        // }
+        //
+        // public static void MoveDown<T>(this IList<T> list, int indexToMove) where T : ISortIndex
+        // {
+        //     Move(list, indexToMove, MoveDirection.Down);
+        // }
 
         // ReSharper disable PossibleStructMemberModificationOfNonVariableStruct
-        private static void Move<T>(IList<T> list, int indexToMove, MoveDirection direction) where T : ISortIndex
+        public static void Move<T>(this IList<T> list, int indexToMove, bool moveUp) where T : ISortIndex
         {
-            if (direction == MoveDirection.Up)
+            if (moveUp)
             {
                 var old = list[indexToMove - 1].SortIndex;
                 list[indexToMove - 1].SortIndex = list[indexToMove].SortIndex;

@@ -61,6 +61,10 @@ class Board extends React.PureComponent {
         this.handleEditNoteModal(emptyNote);
     }
 
+    moveNote = (noteIndex, laneId, boardId, moveUp) => {
+        this.props.moveNote(noteIndex, laneId, boardId, moveUp);
+    }
+
     render() {
         return (
             <div>
@@ -76,6 +80,7 @@ class Board extends React.PureComponent {
                                 boardId={this.props.boardId}
                                 detailsNoteModal={this.handleDetailsNoteModal}
                                 editNoteModal={this.handleEditNoteModal}
+                                moveNote={this.moveNote}
                             />
                         )}
 

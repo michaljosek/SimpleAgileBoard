@@ -25,6 +25,22 @@ class Note extends React.PureComponent {
         this.props.editNoteModal(this.props.note);
     }
 
+    moveNoteUp = () => {
+        this.props.moveNote(this.props.note.sortIndex, this.props.laneId, this.props.boardId, true);
+    }
+
+    moveNoteDown = () => {
+        this.props.moveNote(this.props.note.sortIndex, this.props.laneId, this.props.boardId, false);
+    }
+
+    shouldRenderMoveNoteUpButton() {
+        return this.props.note.sortIndex !== 0 ? true : false;
+    }
+
+    shouldRenderMoveNoteDownButton() {
+        return this.props.note.sortIndex !== (this.props.notesCount - 1) ? true : false;
+    }
+
     render() { 
         return(
             <li className="list-group-item">
@@ -33,10 +49,20 @@ class Note extends React.PureComponent {
                         <div className="card-body">
                             <h5 className="card-title">{this.props.note.noteBoardId}</h5>
                             <p className="card-text">{this.props.note.title}</p>
-                            <div className="pull-right action-buttons">
-                                <FontAwesomeIcon icon={faArrowUp} />
-                                <FontAwesomeIcon icon={faArrowDown} />
 
+                            <div className="pull-left action-buttons">
+                                {this.shouldRenderMoveNoteUpButton() &&
+                                    <button onClick={this.moveNoteUp}>
+                                        <FontAwesomeIcon icon={faArrowUp} />
+                                    </button>
+                                }
+                                {this.shouldRenderMoveNoteDownButton() &&
+                                    <button onClick={this.moveNoteDown}>
+                                        <FontAwesomeIcon icon={faArrowDown} />
+                                    </button>
+                                }
+                            </div>
+                            <div className="pull-right action-buttons">
                                 <button onClick={this.detailsNoteModal}>
                                     <FontAwesomeIcon icon={faInfoCircle}/>
                                 </button>

@@ -7,7 +7,7 @@ namespace Boilerplate.Models
 {
     public enum MoveDirection
     {
-        Up,
-        Down
+        Up = 0,
+        Down = 1
     }
 }

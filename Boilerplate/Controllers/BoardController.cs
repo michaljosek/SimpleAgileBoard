@@ -155,6 +155,22 @@ namespace Boilerplate.Controllers
             return lane;
         }
 
+        [Route("moveNote")]
+        [HttpPost]
+        public IActionResult MoveNotee(MoveNote moveNote)
+        {
+            var lane = GetLane(moveNote.LaneId);
+
+            lane.Notes.Move(moveNote.NoteIndex, moveNote.MoveUp);
+
+            _dbContext.Lanes.Update(lane);
+            _dbContext.SaveChanges();
+
+            var board = GetBoard(moveNote.BoardId);
+
+            return Ok(board);
+        }
+
         public class AddNote
         {
             public int LaneId { get; set; }
@@ -167,6 +183,14 @@ namespace Boilerplate.Controllers
             public int NoteId { get; set; }
 
             public int BoardId { get; set; }
+        }
+
+        public class MoveNote
+        {
+            public int NoteIndex { get; set; }
+            public int LaneId { get; set; }
+            public int BoardId { get; set; }
+            public bool MoveUp { get; set; }
         }
 
         public class EditNote
