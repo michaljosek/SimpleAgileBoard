@@ -34,7 +34,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SimpleAgileBoard.Application\SimpleAgileBoard.Application.csproj" />
     <ProjectReference Include="..\SimpleAgileBoard.Domain\SimpleAgileBoard.Domain.csproj" />
+    <ProjectReference Include="..\SimpleAgileBoard.Persistence\SimpleAgileBoard.Persistence.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

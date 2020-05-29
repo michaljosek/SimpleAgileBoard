@@ -1,9 +1,0 @@
-C:\Users\imk\Desktop\SimpleAgileBoard\src\SimpleAgileBoard.Persistence\bin\Debug\netcoreapp3.1\SimpleAgileBoard.Persistence.deps.json
-C:\Users\imk\Desktop\SimpleAgileBoard\src\SimpleAgileBoard.Persistence\bin\Debug\netcoreapp3.1\SimpleAgileBoard.Persistence.dll
-C:\Users\imk\Desktop\SimpleAgileBoard\src\SimpleAgileBoard.Persistence\bin\Debug\netcoreapp3.1\SimpleAgileBoard.Persistence.pdb
-C:\Users\imk\Desktop\SimpleAgileBoard\src\SimpleAgileBoard.Persistence\obj\Debug\netcoreapp3.1\SimpleAgileBoard.Persistence.csprojAssemblyReference.cache
-C:\Users\imk\Desktop\SimpleAgileBoard\src\SimpleAgileBoard.Persistence\obj\Debug\netcoreapp3.1\SimpleAgileBoard.Persistence.csproj.CoreCompileInputs.cache
-C:\Users\imk\Desktop\SimpleAgileBoard\src\SimpleAgileBoard.Persistence\obj\Debug\netcoreapp3.1\SimpleAgileBoard.Persistence.AssemblyInfoInputs.cache
-C:\Users\imk\Desktop\SimpleAgileBoard\src\SimpleAgileBoard.Persistence\obj\Debug\netcoreapp3.1\SimpleAgileBoard.Persistence.AssemblyInfo.cs
-C:\Users\imk\Desktop\SimpleAgileBoard\src\SimpleAgileBoard.Persistence\obj\Debug\netcoreapp3.1\SimpleAgileBoard.Persistence.dll
-C:\Users\imk\Desktop\SimpleAgileBoard\src\SimpleAgileBoard.Persistence\obj\Debug\netcoreapp3.1\SimpleAgileBoard.Persistence.pdb

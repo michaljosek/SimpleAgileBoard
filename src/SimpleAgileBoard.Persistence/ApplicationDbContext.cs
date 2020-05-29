@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SimpleAgileBoard.Domain.Entities;
 
-namespace Boilerplate.EF
+namespace SimpleAgileBoard.Persistence
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -17,5 +13,11 @@ namespace Boilerplate.EF
         public DbSet<Board> Boards { get; set; }
         public DbSet<Lane> Lanes { get; set; }
         public DbSet<Note> Notes { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+        }
     }
 }

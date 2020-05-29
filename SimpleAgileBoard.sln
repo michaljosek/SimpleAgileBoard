@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAgileBoard.Persistenc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAgileBoard.Domain", "src\SimpleAgileBoard.Domain\SimpleAgileBoard.Domain.csproj", "{680C9D07-0243-42FF-977B-5054984AE34F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAgileBoard.Application", "src\SimpleAgileBoard.Application\SimpleAgileBoard.Application.csproj", "{B91D6B77-0F0F-43EE-8A5F-CF6C70A6A0E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{680C9D07-0243-42FF-977B-5054984AE34F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{680C9D07-0243-42FF-977B-5054984AE34F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{680C9D07-0243-42FF-977B-5054984AE34F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B91D6B77-0F0F-43EE-8A5F-CF6C70A6A0E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B91D6B77-0F0F-43EE-8A5F-CF6C70A6A0E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B91D6B77-0F0F-43EE-8A5F-CF6C70A6A0E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B91D6B77-0F0F-43EE-8A5F-CF6C70A6A0E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

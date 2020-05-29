@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Boilerplate.EF;
 using Boilerplate.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SimpleAgileBoard.Domain.Entities;
+using SimpleAgileBoard.Persistence;
 
 namespace Boilerplate.Controllers
 {

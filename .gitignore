@@ -1,2 +1,8 @@
 /.vs
 /Boilerplate/ClientApp/package-lock.json
+/src/SimpleAgileBoard.Application/obj
+/src/SimpleAgileBoard.Application/bin
+/src/SimpleAgileBoard.Domain/obj
+/src/SimpleAgileBoard.Domain/bin
+/src/SimpleAgileBoard.Persistence/obj
+/src/SimpleAgileBoard.Persistence/bin

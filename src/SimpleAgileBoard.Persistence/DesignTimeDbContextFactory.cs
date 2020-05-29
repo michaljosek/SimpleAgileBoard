@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace Boilerplate.EF
+namespace SimpleAgileBoard.Persistence
 {
     public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
@@ -19,7 +15,7 @@ namespace Boilerplate.EF
                 .Build();
 
             var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var connectionString = ConfigurationExtensions.GetConnectionString(configuration, "DefaultConnection");
             builder.UseSqlServer(connectionString);
 
             return new ApplicationDbContext(builder.Options);
