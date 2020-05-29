@@ -31,7 +31,7 @@ const DetailsNoteModal = ({ isDetailsNoteModalOpen, detailsNoteModal, detailsNot
                 </div>
             </div>
         </form>
-        <button onClick={detailsNoteModal}>Close</button>
+        <button type="button" class="btn btn-primary right5" onClick={detailsNoteModal}>Close</button>
         
       </div>
   </Modal>

@@ -28,8 +28,8 @@ const AddNoteModal = ({ isAddNoteModalOpen, addNoteModal, addNote, lanes }) =>
             <Form.Label>Description</Form.Label>
             <Form.Control type="text" />
         </Form.Group>
-        <button onClick={addNote}>Add</button>
-        <button onClick={addNoteModal}>Close</button>
+        <button type="button" class="btn btn-primary right5" onClick={addNote}>Add</button>
+        <button type="button" class="btn btn-primary right5" onClick={addNoteModal}>Close</button>
     </Form>
   </Modal>
 

@@ -52,26 +52,26 @@ class Note extends React.PureComponent {
 
                             <div className="pull-left action-buttons">
                                 {this.shouldRenderMoveNoteUpButton() &&
-                                    <button onClick={this.moveNoteUp}>
+                                    <button onClick={this.moveNoteUp} className="btn btn-sm">
                                         <FontAwesomeIcon icon={faArrowUp} />
                                     </button>
                                 }
                                 {this.shouldRenderMoveNoteDownButton() &&
-                                    <button onClick={this.moveNoteDown}>
+                                    <button onClick={this.moveNoteDown} className="btn btn-sm">
                                         <FontAwesomeIcon icon={faArrowDown} />
                                     </button>
                                 }
                             </div>
                             <div className="pull-right action-buttons">
-                                <button onClick={this.detailsNoteModal}>
+                                <button onClick={this.detailsNoteModal} className="btn btn-sm">
                                     <FontAwesomeIcon icon={faInfoCircle}/>
                                 </button>
 
-                                <button onClick={this.editNoteModal}>
+                                <button onClick={this.editNoteModal} className="btn btn-sm">
                                     <FontAwesomeIcon icon={faEdit}/>
                                 </button>
                                 
-                                <button onClick={this.deleteNote}>
+                                <button onClick={this.deleteNote} className="btn btn-sm">
                                     <FontAwesomeIcon icon={faTrash}/>
                                 </button>
                             </div>

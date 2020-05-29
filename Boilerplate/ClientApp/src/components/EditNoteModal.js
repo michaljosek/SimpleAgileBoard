@@ -1,8 +1,13 @@
 import React from 'react';
 import Modal from "react-modal"
 import PropTypes from 'prop-types';
+import Form from 'react-bootstrap/Form';
 
-const EditNoteModal = ({ isEditNoteModalOpen, editNoteModal, editNote, editNoteUpdate }) =>
+// handleChange = (event) => {
+//     console.log(event.target.value);
+// };
+
+const EditNoteModal = ({ isEditNoteModalOpen, editNoteModal, editNote, editNoteUpdate, lanes }) =>
   <Modal
     isOpen={isEditNoteModalOpen}
     handleModalClick={editNoteModal}
@@ -12,6 +17,14 @@ const EditNoteModal = ({ isEditNoteModalOpen, editNoteModal, editNote, editNoteU
   >
       <div>
         <form>
+            <Form.Group controlId="formAddNoteLaneId">
+                <Form.Label>Lane</Form.Label>
+                <Form.Control as="select">
+                    {lanes.map(lane =>
+                        <option key={lane.laneId} value={lane.laneId}>{lane.name}</option>
+                    )}
+                </Form.Control>
+            </Form.Group>
             <input id="formEditNoteNoteId" defaultValue={editNote.noteId} hidden />
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">Note</label>
@@ -31,8 +44,8 @@ const EditNoteModal = ({ isEditNoteModalOpen, editNoteModal, editNote, editNoteU
                     <textarea id="formEditNoteDescription" className="form-control" rows="10" type="text" defaultValue={editNote.description} />
                 </div>
             </div>
-            <button onClick={editNoteUpdate}>Edit</button>
-            <button onClick={editNoteModal}>Close</button>
+            <button type="button" class="btn btn-primary right5" onClick={editNoteUpdate}>Edit</button>
+            <button type="button" class="btn btn-primary right5" onClick={editNoteModal}>Close</button>
         </form>        
       </div>    
   </Modal>
@@ -41,7 +54,8 @@ EditNoteModal.propTypes = {
     isEditNoteModalOpen: PropTypes.bool.isRequired,
     editNoteModal: PropTypes.func.isRequired,
     editNote: PropTypes.object.isRequired,
-    editNoteUpdate: PropTypes.func.isRequired
+    editNoteUpdate: PropTypes.func.isRequired,
+    lanes: PropTypes.arrayOf(PropTypes.object).isRequired
   }
 
 export default EditNoteModal;

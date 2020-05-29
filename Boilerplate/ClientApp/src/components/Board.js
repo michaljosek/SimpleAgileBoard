@@ -2,8 +2,10 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { boardActionsCreators } from '../actions/Board';
+import { laneActionsCreators } from '../actions/Lane';
 
 import AddNoteModal from './AddNoteModal';
+import AddLaneModal from './Lane/AddLaneModal';
 import DetailsNoteModal from './DetailsNoteModal';
 import EditNoteModal from './EditNoteModal';
 import Lane from './Lane';
@@ -21,6 +23,7 @@ class Board extends React.PureComponent {
             isAddNoteModalOpen: false,
             isDetailsNoteModalOpen: false,
             isEditNoteModalOpen: false,
+            isAddLaneModalOpen: false,
             detailsNote: emptyNote,
             editNote: emptyNote
         };
@@ -28,7 +31,7 @@ class Board extends React.PureComponent {
 
     componentDidMount() {
         const boardId = parseInt(this.props.match.params.boardId, 10) || 0;
-        this.props.getBoard(boardId);
+        this.props.boardActions.getBoard(boardId);
     }
     
     handleAddNoteModal = () => {
@@ -36,6 +39,13 @@ class Board extends React.PureComponent {
             isAddNoteModalOpen: !this.state.isAddNoteModalOpen 
         })
     }
+
+    handleAddLaneModal = () => {
+        this.setState({ 
+            isAddLaneModalOpen: !this.state.isAddLaneModalOpen 
+        })
+    }
+
 
     handleDetailsNoteModal = (note) => {
         this.setState({ 
@@ -52,25 +62,35 @@ class Board extends React.PureComponent {
     }
 
     addNote = (e) => {
-        this.props.addNote(e);
+        this.props.boardActions.addNote(e);
         this.handleAddNoteModal();
     }
 
+    addLane = (e) => {
+        this.props.laneActions.addLane(e, this.props.boardId);
+        this.handleAddLaneModal();
+    }
+
     editNoteUpdate = (e) => {
-        this.props.editNote(e, this.props.boardId);
+        this.props.boardActions.editNote(e, this.props.boardId);
         this.handleEditNoteModal(emptyNote);
     }
 
     moveNote = (noteIndex, laneId, boardId, moveUp) => {
-        this.props.moveNote(noteIndex, laneId, boardId, moveUp);
+        this.props.boardActions.moveNote(noteIndex, laneId, boardId, moveUp);
     }
 
     render() {
         return (
             <div>
-                {this.props.name}
-                <button onClick={this.handleAddNoteModal}>Add note</button>
                 <div className="container">
+                    <div className="row top5">
+                        <button type="button" className="btn btn-primary right5" onClick={this.handleAddNoteModal}>Add note</button>
+                        <button type="button" className="btn btn-primary right5" onClick={this.handleAddLaneModal}>Add lane</button>
+                    </div>
+                    <div className="row top5 text-center">
+                        <div className="alert alert-info alert-link">{this.props.name}</div>
+                    </div>
                     <div className="row">
                         {this.props.lanes.map(lane =>
                             <Lane 
@@ -100,6 +120,12 @@ class Board extends React.PureComponent {
                             editNoteModal={this.handleEditNoteModal}
                             editNote={this.state.editNote}
                             editNoteUpdate={this.editNoteUpdate}
+                            lanes={this.props.lanes}
+                        />
+                        <AddLaneModal 
+                            isAddLaneModalOpen={this.state.isAddLaneModalOpen}
+                            addLaneModal={this.handleAddLaneModal}
+                            addLane={this.addLane}
                         />
                     </div>         
                 </div>
@@ -108,12 +134,18 @@ class Board extends React.PureComponent {
       }
 }
 
-
+// function mapDispatchToProps(dispatch) {
+//     return bindActionCreators(boardActionsCreators, dispatch);
+// }
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(boardActionsCreators, dispatch);
-}
+    return {
+        boardActions: bindActionCreators(boardActionsCreators, dispatch),
+        laneActions: bindActionCreators(laneActionsCreators, dispatch)
+    }
+  }
 
 function mapStateToProps(state) {
     return Object.assign({}, state.board);
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Board);

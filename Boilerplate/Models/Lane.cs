@@ -16,5 +16,12 @@ namespace Boilerplate.Models
         {
             Notes = new List<Note>();
         }
+
+        public void AddNote(Note note)
+        {
+            note.SortIndex = Notes.Count;
+
+            Notes.Add(note);
+        }
     }
 }

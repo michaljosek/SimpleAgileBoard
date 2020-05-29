@@ -46,6 +46,14 @@ namespace Boilerplate.Controllers
         //    });
         //}
 
+        [Route("getBoards")]
+        public IActionResult Get()
+        {
+            var boards = _dbContext.Boards.ToList();
+
+            return Ok(boards);
+        }
+
         [Route("getBoard/{boardId}")]
         public IActionResult Get(int boardId)
         {
@@ -56,9 +64,14 @@ namespace Boilerplate.Controllers
 
         [Route("addLane")]
         [HttpPost]
-        public IActionResult AddLane(int boardId, Lane lane)
+        public IActionResult AddLanee(AddLane addLane)
         {
-            var board = GetBoard(boardId);
+            var board = GetBoard(addLane.BoardId);
+            var lane = new Lane
+            {
+                Name = addLane.Name
+            };
+
             board.Lanes.Add(lane);
 
             _dbContext.Update(board);
@@ -78,7 +91,7 @@ namespace Boilerplate.Controllers
                 Description = addNote.Description
             };
 
-            lane.Notes.Add(note);
+            lane.AddNote(note);
 
             _dbContext.Update(lane);
             _dbContext.SaveChanges();
@@ -112,6 +125,21 @@ namespace Boilerplate.Controllers
             _dbContext.SaveChanges();
 
             var board = GetBoard(deleteNote.BoardId);
+
+            return Ok(board);
+        }
+
+        [Route("deleteLane")]
+        [HttpPost]
+        public IActionResult DeleteLanee(DeleteLane deleteLane)
+        {
+            var lane = _dbContext.Lanes
+                .FirstOrDefault(x => x.LaneId == deleteLane.LaneId);
+
+            _dbContext.Lanes.Remove(lane);
+            _dbContext.SaveChanges();
+
+            var board = GetBoard(deleteLane.BoardId);
 
             return Ok(board);
         }
@@ -178,9 +206,22 @@ namespace Boilerplate.Controllers
             public string Description { get; set; }
         }
 
+        public class AddLane
+        {
+            public int BoardId { get; set; }
+            public string Name { get; set; }
+        }
+
         public class DeleteNote
         {
             public int NoteId { get; set; }
+
+            public int BoardId { get; set; }
+        }
+
+        public class DeleteLane
+        {
+            public int LaneId { get; set; }
 
             public int BoardId { get; set; }
         }
