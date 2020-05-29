@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Boilerplate.Models
+namespace SimpleAgileBoard.Domain.Entities
 {
-    public interface ISortIndex
+    public enum MoveDirection
     {
-        int SortIndex { get; set; }
+        Up = 0,
+        Down = 1
     }
 }

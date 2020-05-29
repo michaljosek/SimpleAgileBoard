@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Boilerplate.Models;
+using SimpleAgileBoard.Domain.Interfaces;
 
 namespace Boilerplate.Extensions
 {

@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAgileBoard.Web", "src\SimpleAgileBoard.Web\SimpleAgileBoard.Web.csproj", "{27926062-E168-4A8A-999E-58368E875A6B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAgileBoard.Persistence", "src\SimpleAgileBoard.Persistence\SimpleAgileBoard.Persistence.csproj", "{86573F7A-914C-4EE0-8BDA-8E7FB589C979}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAgileBoard.Domain", "src\SimpleAgileBoard.Domain\SimpleAgileBoard.Domain.csproj", "{680C9D07-0243-42FF-977B-5054984AE34F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{27926062-E168-4A8A-999E-58368E875A6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27926062-E168-4A8A-999E-58368E875A6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27926062-E168-4A8A-999E-58368E875A6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86573F7A-914C-4EE0-8BDA-8E7FB589C979}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86573F7A-914C-4EE0-8BDA-8E7FB589C979}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86573F7A-914C-4EE0-8BDA-8E7FB589C979}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86573F7A-914C-4EE0-8BDA-8E7FB589C979}.Release|Any CPU.Build.0 = Release|Any CPU
+		{680C9D07-0243-42FF-977B-5054984AE34F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{680C9D07-0243-42FF-977B-5054984AE34F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{680C9D07-0243-42FF-977B-5054984AE34F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{680C9D07-0243-42FF-977B-5054984AE34F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

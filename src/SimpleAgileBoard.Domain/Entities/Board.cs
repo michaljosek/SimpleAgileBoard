@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Boilerplate.Models
+namespace SimpleAgileBoard.Domain.Entities
 {
     public class Board
     {

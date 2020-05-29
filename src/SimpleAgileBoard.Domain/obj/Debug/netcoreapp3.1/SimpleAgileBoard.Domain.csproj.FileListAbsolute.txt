@@ -1,0 +1,9 @@
+C:\Users\imk\Desktop\SimpleAgileBoard\src\SimpleAgileBoard.Domain\bin\Debug\netcoreapp3.1\SimpleAgileBoard.Domain.deps.json
+C:\Users\imk\Desktop\SimpleAgileBoard\src\SimpleAgileBoard.Domain\bin\Debug\netcoreapp3.1\SimpleAgileBoard.Domain.dll
+C:\Users\imk\Desktop\SimpleAgileBoard\src\SimpleAgileBoard.Domain\obj\Debug\netcoreapp3.1\SimpleAgileBoard.Domain.csprojAssemblyReference.cache
+C:\Users\imk\Desktop\SimpleAgileBoard\src\SimpleAgileBoard.Domain\obj\Debug\netcoreapp3.1\SimpleAgileBoard.Domain.AssemblyInfoInputs.cache
+C:\Users\imk\Desktop\SimpleAgileBoard\src\SimpleAgileBoard.Domain\obj\Debug\netcoreapp3.1\SimpleAgileBoard.Domain.AssemblyInfo.cs
+C:\Users\imk\Desktop\SimpleAgileBoard\src\SimpleAgileBoard.Domain\bin\Debug\netcoreapp3.1\SimpleAgileBoard.Domain.pdb
+C:\Users\imk\Desktop\SimpleAgileBoard\src\SimpleAgileBoard.Domain\obj\Debug\netcoreapp3.1\SimpleAgileBoard.Domain.csproj.CoreCompileInputs.cache
+C:\Users\imk\Desktop\SimpleAgileBoard\src\SimpleAgileBoard.Domain\obj\Debug\netcoreapp3.1\SimpleAgileBoard.Domain.dll
+C:\Users\imk\Desktop\SimpleAgileBoard\src\SimpleAgileBoard.Domain\obj\Debug\netcoreapp3.1\SimpleAgileBoard.Domain.pdb

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Boilerplate.EF;
 using Boilerplate.Extensions;
-using Boilerplate.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SimpleAgileBoard.Domain.Entities;
 
 namespace Boilerplate.Controllers
 {
