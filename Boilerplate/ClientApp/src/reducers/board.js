@@ -1,16 +1,17 @@
 import createReducer from '../store/createReducer.js'
 import * as types from '../actions/type.js'
 
-const unloadedState = { 
+export const unloadedStateBoard = { 
     boardId: 0,
     name: "",
     lanes: []
  };
 
-export const board = createReducer(unloadedState, {
+
+export const board = createReducer(unloadedStateBoard, {
     [types.SET_BOARD](state, action) {
         if (state === undefined) {
-            return unloadedState;
+            return unloadedStateBoard;
         }
 
         var data = action.data;
@@ -22,5 +23,4 @@ export const board = createReducer(unloadedState, {
     }
 });
 
-
-export default unloadedState;
+export default unloadedStateBoard;

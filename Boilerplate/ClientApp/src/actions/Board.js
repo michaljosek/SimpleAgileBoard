@@ -50,6 +50,15 @@ export const boardActionsCreators = {
                     dispatch(setBoard(types.SET_BOARD, data));
                 });
             }
+        },
+        getBoards: () => {
+            return (dispatch, getState) => {
+                fetch(`api/board/getBoards/`)
+                       .then(response => response.json())
+                       .then(data => {
+                           dispatch(setBoard(types.SET_BOARDS, data));
+                });
+            }
         }
     }
 
