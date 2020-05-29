@@ -1,13 +1,16 @@
 import React from 'react';
 import BoardListItem from './BoardListItem';
 
-const BoardList = ({ boards }) => {
+const BoardList = ({ boards, editBoardModal }) => {
   return (
     <table className="table table-bordered table-condensed table-hover table-striped table">
         <thead>
             <tr>
                 <th>Name</th>
                 <th>Note prefix</th>
+                <th>View</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -15,6 +18,7 @@ const BoardList = ({ boards }) => {
                 <BoardListItem
                     key={board.boardId}
                     board={board}
+                    editBoardModal={editBoardModal}
                 />)
             }
         </tbody>

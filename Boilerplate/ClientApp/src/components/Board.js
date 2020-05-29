@@ -134,9 +134,7 @@ class Board extends React.PureComponent {
       }
 }
 
-// function mapDispatchToProps(dispatch) {
-//     return bindActionCreators(boardActionsCreators, dispatch);
-// }
+
 function mapDispatchToProps(dispatch) {
     return {
         boardActions: bindActionCreators(boardActionsCreators, dispatch),

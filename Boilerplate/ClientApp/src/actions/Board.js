@@ -59,7 +59,39 @@ export const boardActionsCreators = {
                            dispatch(setBoard(types.SET_BOARDS, data));
                 });
             }
-        }
+        },
+        addBoard: (event) => {
+            const name = event.target.form.elements.formAddBoardName.value;
+            const notePrefix = event.target.form.elements.formAddBoardNotePrefix.value;
+
+            return (dispatch, getState) => {
+                apiFetch('api/board/addBoard', dispatch, { name, notePrefix })
+                .then(data => {
+                    dispatch(setBoard(types.SET_BOARDS, data));
+                });
+               }
+        },
+        deleteBoard: (boardId) => {
+            return (dispatch, getState) => {
+                apiFetch('api/board/deleteBoard/', dispatch, { boardId }, 'POST')
+                .then(data => {
+                    dispatch(setBoard(types.SET_BOARDS, data));
+                });
+            }
+        },
+
+        editBoard: (event) => {
+            const name = event.target.form.elements.formEditBoardName.value;
+            const notePrefix = event.target.form.elements.formEditBoardNotePrefix.value;
+            const boardId = Number(event.target.form.elements.formEditBoardBoardId.value);
+
+            return (dispatch, getState) => {
+                apiFetch('api/board/editBoard', dispatch, { boardId, name, notePrefix })
+                .then(data => {
+                    dispatch(setBoard(types.SET_BOARDS, data));
+                });
+            }
+        },
     }
 
 

@@ -54,12 +54,63 @@ namespace Boilerplate.Controllers
             return Ok(boards);
         }
 
+        [Route("editBoard")]
+        [HttpPost]
+        public IActionResult EditBoardd(EditBoard editBoard)
+        {
+            var board = _dbContext.Boards
+                .FirstOrDefault(x => x.BoardId == editBoard.BoardId);
+
+            board.Name = editBoard.Name;
+            board.NotePrefix = editBoard.NotePrefix;
+
+            _dbContext.Boards.Update(board);
+            _dbContext.SaveChanges();
+
+            var boards = _dbContext.Boards.ToList();
+            
+            return Ok(boards);
+        }
+
+        [Route("addBoard")]
+        [HttpPost]
+        public IActionResult AddBoardd(AddBoard addBoard)
+        {
+            var board = new Board
+            {
+                Name = addBoard.Name,
+                NotePrefix = addBoard.NotePrefix,
+            };
+
+
+            _dbContext.Boards.Add(board);
+            _dbContext.SaveChanges();
+
+            var boards = _dbContext.Boards.ToList();
+
+            return Ok(boards);
+        }
+
         [Route("getBoard/{boardId}")]
         public IActionResult Get(int boardId)
         {
             var board = GetBoard(boardId);
 
             return Ok(board);
+        }
+
+        [Route("deleteBoard")]
+        [HttpPost]
+        public IActionResult DeleteBoardd(DeleteBoard deleteBoard)
+        {
+            var board = GetBoard(deleteBoard.BoardId);
+
+            _dbContext.Boards.Remove(board);
+            _dbContext.SaveChanges();
+
+            var boards = _dbContext.Boards.ToList();
+
+            return Ok(boards);
         }
 
         [Route("addLane")]
@@ -226,6 +277,11 @@ namespace Boilerplate.Controllers
             public int BoardId { get; set; }
         }
 
+        public class DeleteBoard
+        {
+            public int BoardId { get; set; }
+        }
+
         public class MoveNote
         {
             public int NoteIndex { get; set; }
@@ -240,6 +296,19 @@ namespace Boilerplate.Controllers
             public int NoteId { get; set; }
             public string Title { get; set; }
             public string Description { get; set; }
+        }
+
+        public class EditBoard
+        {
+            public int BoardId { get; set; }
+            public string Name { get; set; }
+            public string NotePrefix { get; set; }
+        }
+
+        public class AddBoard
+        {
+            public string Name { get; set; }
+            public string NotePrefix { get; set; }
         }
     }
 }

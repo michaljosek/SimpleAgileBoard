@@ -3,10 +3,6 @@ import Modal from "react-modal"
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 
-// handleChange = (event) => {
-//     console.log(event.target.value);
-// };
-
 const EditNoteModal = ({ isEditNoteModalOpen, editNoteModal, editNote, editNoteUpdate, lanes }) =>
   <Modal
     isOpen={isEditNoteModalOpen}
@@ -17,14 +13,6 @@ const EditNoteModal = ({ isEditNoteModalOpen, editNoteModal, editNote, editNoteU
   >
       <div>
         <form>
-            <Form.Group controlId="formAddNoteLaneId">
-                <Form.Label>Lane</Form.Label>
-                <Form.Control as="select">
-                    {lanes.map(lane =>
-                        <option key={lane.laneId} value={lane.laneId}>{lane.name}</option>
-                    )}
-                </Form.Control>
-            </Form.Group>
             <input id="formEditNoteNoteId" defaultValue={editNote.noteId} hidden />
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">Note</label>
