@@ -10,7 +10,7 @@ namespace SimpleAgileBoard.Domain.Extensions
         {
             if (board == null)
             {
-                throw new ArgumentException(nameof(board));
+                throw new ArgumentNullException(nameof(board));
             }
 
             board.Lanes = board.Lanes.OrderBy(x =>

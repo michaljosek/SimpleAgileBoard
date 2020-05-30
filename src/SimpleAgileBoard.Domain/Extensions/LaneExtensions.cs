@@ -10,7 +10,7 @@ namespace SimpleAgileBoard.Domain.Extensions
         {
             if (lane == null)
             {
-                throw new ArgumentException(nameof(lane));
+                throw new ArgumentNullException(nameof(lane));
             }
 
             lane.Notes = lane.Notes

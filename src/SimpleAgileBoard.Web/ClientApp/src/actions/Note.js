@@ -9,23 +9,18 @@ export const noteActionsCreators = {
             const laneId = Number(event.target.form.elements.formAddNoteLaneId.value);
 
             return (dispatch, getState) => {
-                apiFetch('api/board/addNote', dispatch, { laneId, title, description })
+                apiFetch('api/note/add', dispatch, { laneId, title, description })
                 .then(data => {
-                    dispatch(Board.setBoard(types.SET_BOARD, data));
+                    dispatch(Board.setBoard(types.SET_BOARD, data.board));
                 });
                }
         },
         deleteNote: (noteId, boardId) => {
             return (dispatch, getState) => {
-                apiFetch('api/board/deleteNote/', dispatch, { noteId, boardId }, 'POST')
+                apiFetch('api/note/delete', dispatch, { noteId, boardId }, 'POST')
                 .then(data => {
-                    dispatch(Board.setBoard(types.SET_BOARD, data));
+                    dispatch(Board.setBoard(types.SET_BOARD, data.board));
                 });
             }
-        },
-        test: () => {
-            return (dispatch, getState) => {
-                alert(':)');
-            }
-        },
+        }
     }

@@ -5,6 +5,7 @@ using System.Text;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SimpleAgileBoard.Application.Boards.Queries;
 
 namespace SimpleAgileBoard.Application
 {
@@ -14,6 +15,8 @@ namespace SimpleAgileBoard.Application
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
+            services.AddTransient<IBoardRepository, BoardRepository>();
+            
             return services;
         }
 

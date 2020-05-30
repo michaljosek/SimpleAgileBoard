@@ -5,9 +5,9 @@ import * as Board from './Board';
 export const laneActionsCreators = {
         deleteLane: (laneId, boardId) => {
             return (dispatch, getState) => {
-                apiFetch('api/board/deleteLane/', dispatch, { laneId, boardId }, 'POST')
+                apiFetch('api/lane/delete', dispatch, { laneId, boardId }, 'POST')
                 .then(data => {
-                    dispatch(Board.setBoard(types.SET_BOARD, data));
+                    dispatch(Board.setBoard(types.SET_BOARD, data.board));
                 });
             }
         },
@@ -15,9 +15,9 @@ export const laneActionsCreators = {
             const name = event.target.form.elements.formAddLaneName.value;
 
             return (dispatch, getState) => {
-                apiFetch('api/board/addLane', dispatch, { boardId, name })
+                apiFetch('api/lane/add', dispatch, { boardId, name })
                 .then(data => {
-                    dispatch(Board.setBoard(types.SET_BOARD, data));
+                    dispatch(Board.setBoard(types.SET_BOARD, data.board));
                 });
             }
         },
