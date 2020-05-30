@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SimpleAgileBoard.Domain.Entities;
+using SimpleAgileBoard.Domain.Interfaces;
 
 namespace SimpleAgileBoard.Persistence
 {
@@ -16,7 +17,7 @@ namespace SimpleAgileBoard.Persistence
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
 
-            // services.AddScoped(provider => provider.GetService<ApplicationDbContext>());
+            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 
             // services.AddDefaultIdentity<ApplicationUser>()
             //     .AddEntityFrameworkStores<ApplicationDbContext>();

@@ -1,24 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using SimpleAgileBoard.Domain.Interfaces;
 
-namespace Boilerplate.Extensions
+namespace SimpleAgileBoard.Domain.Extensions
 {
     public static class ListExtensions
     {
-        // public static void MoveUp<T>(this IList<T> list, int indexToMove) where T : ISortIndex
-        // {
-        //     Move(list, indexToMove, MoveDirection.Up);
-        // }
-        //
-        // public static void MoveDown<T>(this IList<T> list, int indexToMove) where T : ISortIndex
-        // {
-        //     Move(list, indexToMove, MoveDirection.Down);
-        // }
-
-        // ReSharper disable PossibleStructMemberModificationOfNonVariableStruct
         public static void Move<T>(this IList<T> list, int indexToMove, bool moveUp) where T : ISortIndex
         {
             if (moveUp)

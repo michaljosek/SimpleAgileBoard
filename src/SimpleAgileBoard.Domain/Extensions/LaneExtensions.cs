@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using SimpleAgileBoard.Domain.Entities;
 
-namespace Boilerplate.Extensions
+namespace SimpleAgileBoard.Domain.Extensions
 {
     public static class LaneExtensions
     {

@@ -53,10 +53,10 @@ export const boardActionsCreators = {
         },
         getBoards: () => {
             return (dispatch, getState) => {
-                fetch(`api/board/getBoards/`)
+                fetch(`api/board/getAll`)
                        .then(response => response.json())
                        .then(data => {
-                           dispatch(setBoard(types.SET_BOARDS, data));
+                           dispatch(setBoard(types.SET_BOARDS, data.boards));
                 });
             }
         },
@@ -65,17 +65,17 @@ export const boardActionsCreators = {
             const notePrefix = event.target.form.elements.formAddBoardNotePrefix.value;
 
             return (dispatch, getState) => {
-                apiFetch('api/board/addBoard', dispatch, { name, notePrefix })
+                apiFetch('api/board/add', dispatch, { name, notePrefix })
                 .then(data => {
-                    dispatch(setBoard(types.SET_BOARDS, data));
+                    dispatch(setBoard(types.SET_BOARDS, data.boards));
                 });
                }
         },
         deleteBoard: (boardId) => {
             return (dispatch, getState) => {
-                apiFetch('api/board/deleteBoard/', dispatch, { boardId }, 'POST')
+                apiFetch('api/board/delete', dispatch, { boardId }, 'POST')
                 .then(data => {
-                    dispatch(setBoard(types.SET_BOARDS, data));
+                    dispatch(setBoard(types.SET_BOARDS, data.boards));
                 });
             }
         },
@@ -86,9 +86,9 @@ export const boardActionsCreators = {
             const boardId = Number(event.target.form.elements.formEditBoardBoardId.value);
 
             return (dispatch, getState) => {
-                apiFetch('api/board/editBoard', dispatch, { boardId, name, notePrefix })
+                apiFetch('api/board/edit', dispatch, { boardId, name, notePrefix })
                 .then(data => {
-                    dispatch(setBoard(types.SET_BOARDS, data));
+                    dispatch(setBoard(types.SET_BOARDS, data.boards));
                 });
             }
         },
