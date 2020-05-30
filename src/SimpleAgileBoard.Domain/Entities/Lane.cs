@@ -12,6 +12,7 @@ namespace SimpleAgileBoard.Domain.Entities
         public string Name { get; set; }
         public List<Note> Notes { get; set; }
         public int SortIndex { get; set; }
+        public int? BoardId { get; set; }
 
         public Lane()
         {

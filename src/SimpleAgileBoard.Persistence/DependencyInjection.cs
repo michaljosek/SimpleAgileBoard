@@ -14,8 +14,10 @@ namespace SimpleAgileBoard.Persistence
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-            
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
+
+            // services.AddScoped(provider => provider.GetService<ApplicationDbContext>());
+
             // services.AddDefaultIdentity<ApplicationUser>()
             //     .AddEntityFrameworkStores<ApplicationDbContext>();
 

@@ -6,3 +6,11 @@
 /src/SimpleAgileBoard.Domain/bin
 /src/SimpleAgileBoard.Persistence/obj
 /src/SimpleAgileBoard.Persistence/bin
+/.idea/config/applicationhost.config
+/.idea/.idea.SimpleAgileBoard/.idea/contentModel.xml
+/.idea/.idea.SimpleAgileBoard/.idea/encodings.xml
+/.idea/.idea.SimpleAgileBoard/.idea/indexLayout.xml
+/.idea/.idea.SimpleAgileBoard/.idea/modules.xml
+/.idea/.idea.SimpleAgileBoard/.idea/projectSettingsUpdater.xml
+/.idea/.idea.SimpleAgileBoard/riderModule.iml
+/.idea/.idea.SimpleAgileBoard/.idea/vcs.xml

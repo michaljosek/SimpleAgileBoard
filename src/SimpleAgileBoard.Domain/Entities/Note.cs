@@ -13,6 +13,7 @@ namespace SimpleAgileBoard.Domain.Entities
         public string Title { get; set; }
         public string Description { get; set; }
         public int SortIndex { get; set; }
+        public int? LaneId { get; set; }
         //created updated
     }
 }

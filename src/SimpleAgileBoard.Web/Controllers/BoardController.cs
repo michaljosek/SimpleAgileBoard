@@ -123,9 +123,9 @@ namespace Boilerplate.Controllers
                 Name = addLane.Name
             };
 
+
             board.Lanes.Add(lane);
 
-            _dbContext.Update(board);
             _dbContext.SaveChanges();
 
             return Ok(board);

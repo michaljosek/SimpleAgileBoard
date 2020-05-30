@@ -9,8 +9,10 @@ namespace SimpleAgileBoard.Persistence
     {
         public ApplicationDbContext CreateDbContext(string[] args)
         {
+            var basePath = Directory.GetCurrentDirectory() + string.Format("{0}..{0}SimpleAgileBoard.Web", Path.DirectorySeparatorChar);
+
             var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
+                .SetBasePath(basePath)
                 .AddJsonFile("appsettings.json", false, true)
                 .Build();
 
