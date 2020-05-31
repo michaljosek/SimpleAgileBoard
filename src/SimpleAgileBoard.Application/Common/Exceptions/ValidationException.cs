@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using FluentValidation.Results;
 
 namespace SimpleAgileBoard.Application.Common.Exceptions
@@ -16,10 +17,12 @@ namespace SimpleAgileBoard.Application.Common.Exceptions
         public ValidationException(List<ValidationFailure> failures)
             : this()
         {
+            var sb = new StringBuilder();
+
             var propertyNames = failures
                 .Select(e => e.PropertyName)
                 .Distinct();
-
+            
             foreach (var propertyName in propertyNames)
             {
                 var propertyFailures = failures
@@ -28,9 +31,13 @@ namespace SimpleAgileBoard.Application.Common.Exceptions
                     .ToArray();
 
                 Failures.Add(propertyName, propertyFailures);
+                sb.Append(string.Join(" ", propertyFailures));
             }
+
+            AllFailuresMessage = sb.ToString();
         }
 
         public IDictionary<string, string[]> Failures { get; }
+        public string AllFailuresMessage { get; set; }
     }
 }

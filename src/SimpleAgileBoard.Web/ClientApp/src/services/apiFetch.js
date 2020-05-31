@@ -13,11 +13,14 @@ const apiFetch = (url, dispatch, body, method = 'POST') => {
     }    
     
     return new Promise((resolve, reject) => (
-        fetch(url, fetchBody).then((response) => {
-            if (response.status !== 200) {
-                reject('Bad code');
+        fetch(url, fetchBody)
+        .then(response => response.json())
+        .then(response => {
+            if('title' in response) {
+                reject(response.title);
             }
-            return response.json();
+
+            return response;
         })
         .then((data) => resolve(data))
         .catch(() => {

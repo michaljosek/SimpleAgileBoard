@@ -12,6 +12,8 @@ export const noteActionsCreators = {
                 apiFetch('api/note/add', dispatch, { boardId, laneId, title, description })
                 .then(data => {
                     dispatch(Board.setBoard(types.SET_BOARD, data.board));
+                }).catch((error) => {
+                    alert(error);
                 });
                }
         },
@@ -20,6 +22,8 @@ export const noteActionsCreators = {
                 apiFetch('api/note/delete', dispatch, { noteId, boardId }, 'POST')
                 .then(data => {
                     dispatch(Board.setBoard(types.SET_BOARD, data.board));
+                }).catch((error) => {
+                    alert(error);
                 });
             }
         }

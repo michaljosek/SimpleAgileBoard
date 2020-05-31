@@ -8,6 +8,8 @@ export const laneActionsCreators = {
                 apiFetch('api/lane/delete', dispatch, { laneId, boardId }, 'POST')
                 .then(data => {
                     dispatch(Board.setBoard(types.SET_BOARD, data.board));
+                }).catch((error) => {
+                    alert(error);
                 });
             }
         },
@@ -18,6 +20,8 @@ export const laneActionsCreators = {
                 apiFetch('api/lane/add', dispatch, { boardId, name })
                 .then(data => {
                     dispatch(Board.setBoard(types.SET_BOARD, data.board));
+                }).catch((error) => {
+                    alert(error);
                 });
             }
         },

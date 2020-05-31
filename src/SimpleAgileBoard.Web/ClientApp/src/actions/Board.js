@@ -8,7 +8,9 @@ export const boardActionsCreators = {
                    .then(response => response.json())
                    .then(data => {
                        dispatch(setBoard(types.SET_BOARD, data.board));
-                   });
+                   }).catch((error) => {
+                    alert(error);
+                });
            }
         },
         addNote: (event, boardId) => {
@@ -20,6 +22,8 @@ export const boardActionsCreators = {
                 apiFetch('api/note/add', dispatch, { boardId, laneId, title, description })
                 .then(data => {
                     dispatch(setBoard(types.SET_BOARD, data.board));
+                }).catch((error) => {
+                    alert(error);
                 });
                }
         },
@@ -28,6 +32,8 @@ export const boardActionsCreators = {
                 apiFetch('api/note/delete', dispatch, { noteId, boardId }, 'POST')
                 .then(data => {
                     dispatch(setBoard(types.SET_BOARD, data.board));
+                }).catch((error) => {
+                    alert(error);
                 });
             }
         },
@@ -40,6 +46,8 @@ export const boardActionsCreators = {
                 apiFetch('api/note/edit', dispatch, { boardId, noteId, title, description })
                 .then(data => {
                     dispatch(setBoard(types.SET_BOARD, data.board));
+                }).catch((error) => {
+                    alert(error);
                 });
             }
         },
@@ -48,6 +56,8 @@ export const boardActionsCreators = {
                 apiFetch('api/note/move', dispatch, { noteIndex, laneId, boardId, moveUp })
                 .then(data => {
                     dispatch(setBoard(types.SET_BOARD, data.board));
+                }).catch((error) => {
+                    alert(error);
                 });
             }
         },
@@ -57,6 +67,8 @@ export const boardActionsCreators = {
                        .then(response => response.json())
                        .then(data => {
                            dispatch(setBoard(types.SET_BOARDS, data.boards));
+                }).catch((error) => {
+                    alert(error);
                 });
             }
         },
@@ -68,6 +80,8 @@ export const boardActionsCreators = {
                 apiFetch('api/board/add', dispatch, { name, notePrefix })
                 .then(data => {
                     dispatch(setBoard(types.SET_BOARDS, data.boards));
+                }).catch((error) => {
+                    alert(error);
                 });
                }
         },
@@ -76,6 +90,8 @@ export const boardActionsCreators = {
                 apiFetch('api/board/delete', dispatch, { boardId }, 'POST')
                 .then(data => {
                     dispatch(setBoard(types.SET_BOARDS, data.boards));
+                }).catch((error) => {
+                    alert(error);
                 });
             }
         },
@@ -89,6 +105,8 @@ export const boardActionsCreators = {
                 apiFetch('api/board/edit', dispatch, { boardId, name, notePrefix })
                 .then(data => {
                     dispatch(setBoard(types.SET_BOARDS, data.boards));
+                }).catch((error) => {
+                    alert(error);
                 });
             }
         },

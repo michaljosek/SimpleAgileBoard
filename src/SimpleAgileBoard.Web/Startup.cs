@@ -1,4 +1,5 @@
 using Boilerplate.Common;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -6,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SimpleAgileBoard.Application;
+using SimpleAgileBoard.Application.Common;
+using SimpleAgileBoard.Domain.Interfaces;
 using SimpleAgileBoard.Persistence;
 
 namespace Boilerplate
@@ -25,7 +28,8 @@ namespace Boilerplate
             services.AddApplication(Configuration);
             services.AddPersistence(Configuration);
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<IRepository<IBaseEntity>>());
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
