@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SimpleAgileBoard.Application.Common;
+using SimpleAgileBoard.Application.User.Services;
 using SimpleAgileBoard.Domain.Entities;
 using SimpleAgileBoard.Domain.Interfaces;
 
@@ -19,8 +21,8 @@ namespace SimpleAgileBoard.Persistence
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 
-            // services.AddDefaultIdentity<ApplicationUser>()
-            //     .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddScoped<IUserService, UserService>();
 
             return services;
         }

@@ -1,13 +1,18 @@
+using System;
+using System.Text;
 using Boilerplate.Common;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using SimpleAgileBoard.Application;
 using SimpleAgileBoard.Application.Common;
+using SimpleAgileBoard.Application.Common.Models;
 using SimpleAgileBoard.Domain.Interfaces;
 using SimpleAgileBoard.Persistence;
 
@@ -36,6 +41,29 @@ namespace Boilerplate
             {
                 configuration.RootPath = "ClientApp/build";
             });
+            
+            services.Configure<JWT>(Configuration.GetSection("JWT"));
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(o =>
+                {
+                    o.RequireHttpsMetadata = false;
+                    o.SaveToken = false;
+                    o.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ClockSkew = TimeSpan.Zero,
+                        ValidIssuer = Configuration["JWT:Issuer"],
+                        ValidAudience = Configuration["JWT:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Key"]))
+                    };
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +86,8 @@ namespace Boilerplate
             app.UseSpaStaticFiles();
 
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -75,6 +105,8 @@ namespace Boilerplate
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+            
+            ApplicationDbContextSeed.Initialize(app.ApplicationServices);
         }
     }
 }
