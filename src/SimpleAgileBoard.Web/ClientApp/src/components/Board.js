@@ -94,7 +94,7 @@ class Board extends React.PureComponent {
                     <div className="row">
                         {this.props.lanes.map(lane =>
                             <Lane 
-                                key={lane.laneId}
+                                key={lane.id}
                                 lane={lane}
                                 addNote={this.props.addNote}
                                 boardId={this.props.boardId}

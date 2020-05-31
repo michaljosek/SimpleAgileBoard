@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MediatR;
 using SimpleAgileBoard.Application.Boards.Queries.GetBoards;
 using SimpleAgileBoard.Application.Boards.Services;
+using SimpleAgileBoard.Application.Common.Exceptions;
 
 namespace SimpleAgileBoard.Application.Boards.Commands.EditBoard
 {
@@ -22,7 +23,7 @@ namespace SimpleAgileBoard.Application.Boards.Commands.EditBoard
             var board = await _boardRepository.Get(request.BoardId, cancellationToken);
             if (board == null)
             {
-                throw new Exception(); //todo custom exception
+                throw new NotFoundException(nameof(board), request.BoardId);
             }
             
             board.Name = request.Name;

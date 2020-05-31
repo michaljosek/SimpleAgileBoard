@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using SimpleAgileBoard.Application.Boards.Queries.GetBoard;
 using SimpleAgileBoard.Application.Boards.Services;
+using SimpleAgileBoard.Application.Common.Exceptions;
 using SimpleAgileBoard.Domain.Entities;
 
 namespace SimpleAgileBoard.Application.Lanes.Commands.AddLane
@@ -19,6 +20,11 @@ namespace SimpleAgileBoard.Application.Lanes.Commands.AddLane
         public async Task<BoardViewModel> Handle(AddLaneCommand request, CancellationToken cancellationToken)
         {
             var board = await _boardRepository.Get(request.BoardId, cancellationToken);
+            if (board == null)
+            {
+                throw new NotFoundException(nameof(board), request.BoardId);
+            }
+            
             var lane = new Lane
             {
                 Name = request.Name

@@ -16,7 +16,7 @@ export const board = createReducer(unloadedStateBoard, {
 
         var data = action.data;
         return {
-            boardId: data.boardId,
+            boardId: data.id,
             name: data.name,
             lanes: data.lanes
         };

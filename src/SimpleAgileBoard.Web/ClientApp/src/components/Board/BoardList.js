@@ -16,7 +16,7 @@ const BoardList = ({ boards, editBoardModal }) => {
         <tbody>
             {boards.map(board =>
                 <BoardListItem
-                    key={board.boardId}
+                    key={board.id}
                     board={board}
                     editBoardModal={editBoardModal}
                 />)

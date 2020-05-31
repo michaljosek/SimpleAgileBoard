@@ -12,7 +12,7 @@ const EditBoardModal = ({ isEditBoardModalOpen, editBoardModal, editBoard, editB
   >
       <div>
         <form>
-            <input id="formEditBoardBoardId" defaultValue={editBoard.boardId} hidden />
+            <input id="formEditBoardBoardId" defaultValue={editBoard.id} hidden />
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">Name</label>
                 <div className="col-sm-10">

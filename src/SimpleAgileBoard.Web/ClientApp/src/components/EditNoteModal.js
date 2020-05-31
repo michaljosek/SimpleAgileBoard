@@ -13,7 +13,7 @@ const EditNoteModal = ({ isEditNoteModalOpen, editNoteModal, editNote, editNoteU
   >
       <div>
         <form>
-            <input id="formEditNoteNoteId" defaultValue={editNote.noteId} hidden />
+            <input id="formEditNoteNoteId" defaultValue={editNote.id} hidden />
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">Note</label>
                 <div className="col-sm-10">

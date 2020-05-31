@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using SimpleAgileBoard.Application.Common.Exceptions;
 using SimpleAgileBoard.Application.Notes.Services;
 
 namespace SimpleAgileBoard.Application.Notes.Queries.GetNote
@@ -18,6 +19,10 @@ namespace SimpleAgileBoard.Application.Notes.Queries.GetNote
         public async Task<NoteViewModel> Handle(GetNoteQuery request, CancellationToken cancellationToken)
         {
             var note = await _noteRepository.Get(request.NoteId, cancellationToken);
+            if (note == null)
+            {
+                throw new NotFoundException(nameof(note), request.NoteId);
+            }
             
             return new NoteViewModel
             {

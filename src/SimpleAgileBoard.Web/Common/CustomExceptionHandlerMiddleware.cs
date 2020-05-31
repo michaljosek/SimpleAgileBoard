@@ -1,10 +1,10 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using SimpleAgileBoard.Application.Common.Exceptions;
 
 namespace Boilerplate.Common
 {
@@ -37,10 +37,13 @@ namespace Boilerplate.Common
 
             switch (exception)
             {
-                // case ValidationException validationException:
-                //     code = HttpStatusCode.BadRequest;
-                //     result = JsonConvert.SerializeObject(validationException.Failures);
-                //     break;
+                case ValidationException validationException:
+                    code = HttpStatusCode.BadRequest;
+                    result = JsonConvert.SerializeObject(validationException.Failures);
+                    break;
+                case NotFoundException _:
+                    code = HttpStatusCode.NotFound;
+                    break;
             }
 
             context.Response.ContentType = "application/json";

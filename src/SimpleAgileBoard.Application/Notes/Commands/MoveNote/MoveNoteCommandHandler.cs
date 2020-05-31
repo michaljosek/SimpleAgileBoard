@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MediatR;
 using SimpleAgileBoard.Application.Boards.Queries.GetBoard;
 using SimpleAgileBoard.Application.Boards.Services;
+using SimpleAgileBoard.Application.Common.Exceptions;
 using SimpleAgileBoard.Application.Lanes.Services;
 using SimpleAgileBoard.Domain.Extensions;
 
@@ -26,14 +27,18 @@ namespace SimpleAgileBoard.Application.Notes.Commands.MoveNote
             var lane = await _laneRepository.Get(request.LaneId, cancellationToken);
             if (lane == null)
             {
-                throw new Exception();
+                throw new NotFoundException(nameof(lane), request.LaneId);
             }
             
             //todo service
             lane.Notes.Move(request.NoteIndex, request.MoveUp);
             await _laneRepository.Update(lane, cancellationToken);
             var board = await _boardRepository.Get(request.BoardId, cancellationToken);
-
+            if (board == null)
+            {
+                throw new NotFoundException(nameof(board), request.BoardId);
+            }
+            
             return new BoardViewModel
             {
                 Board = board

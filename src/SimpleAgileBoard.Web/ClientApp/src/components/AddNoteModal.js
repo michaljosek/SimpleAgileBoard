@@ -16,7 +16,7 @@ const AddNoteModal = ({ isAddNoteModalOpen, addNoteModal, addNote, lanes }) =>
             <Form.Label>Lane</Form.Label>
             <Form.Control as="select">
                 {lanes.map(lane =>
-                    <option key={lane.laneId} value={lane.laneId}>{lane.name}</option>
+                    <option key={lane.id} value={lane.id}>{lane.name}</option>
                 )}
             </Form.Control>
         </Form.Group>

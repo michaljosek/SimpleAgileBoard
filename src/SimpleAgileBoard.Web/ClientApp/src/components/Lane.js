@@ -11,7 +11,7 @@ import { faTrash, faEdit, faInfoCircle, faArrowUp, faArrowDown } from '@fortawes
 class Lane extends React.PureComponent {
 
     deleteLane = () => {
-        this.props.deleteLane(this.props.lane.laneId, this.props.boardId);
+        this.props.deleteLane(this.props.lane.id, this.props.boardId);
     }
 
     render() {
@@ -32,7 +32,7 @@ class Lane extends React.PureComponent {
                                     key={note.noteId}
                                     note={note}
                                     boardId={this.props.boardId}
-                                    laneId={this.props.lane.laneId}
+                                    laneId={this.props.lane.id}
                                     detailsNoteModal={this.props.detailsNoteModal}
                                     editNoteModal={this.props.editNoteModal}
                                     moveNote={this.props.moveNote}

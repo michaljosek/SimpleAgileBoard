@@ -10,7 +10,7 @@ import DetailsNoteModal from './DetailsNoteModal';
 class Note extends React.PureComponent {
 
     deleteNote = () => {
-        this.props.deleteNote(this.props.note.noteId, this.props.boardId);
+        this.props.deleteNote(this.props.note.id, this.props.boardId);
     }
 
     triggerDetailsNoteModal = () => {

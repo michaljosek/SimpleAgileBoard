@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 
 class BoardListItem extends React.PureComponent {
     deleteBoard = () => {
-      this.props.deleteBoard(this.props.board.boardId);
+      this.props.deleteBoard(this.props.board.id);
     }
 
     editBoardModal = () => {
@@ -13,7 +13,7 @@ class BoardListItem extends React.PureComponent {
     }
     
     render() { 
-      const boardUrl = "/board/" + this.props.board.boardId;
+      const boardUrl = "/board/" + this.props.board.id;
 
       return (
         <React.Fragment>
