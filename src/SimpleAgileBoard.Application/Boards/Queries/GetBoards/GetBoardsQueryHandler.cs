@@ -1,28 +1,25 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using SimpleAgileBoard.Domain.Interfaces;
+using SimpleAgileBoard.Application.Boards.Services;
 
 namespace SimpleAgileBoard.Application.Boards.Queries.GetBoards
 {
     public class GetBoardsQueryHandler : IRequestHandler<GetBoardsQuery, BoardsViewModel>
     {
-        private readonly IApplicationDbContext _applicationDbContext;
+        private readonly IBoardRepository _boardRepository;
 
-        public GetBoardsQueryHandler(IApplicationDbContext applicationDbContext)
+        public GetBoardsQueryHandler(IBoardRepository boardRepository)
         {
-            _applicationDbContext = applicationDbContext;
+            _boardRepository = boardRepository;
         }
         
         public async Task<BoardsViewModel> Handle(GetBoardsQuery request, CancellationToken cancellationToken)
         {
-            var viewModel = new BoardsViewModel
+            return new BoardsViewModel
             {
-                Boards = await _applicationDbContext.Boards.ToListAsync(cancellationToken)
-            };
-
-            return viewModel;
+                Boards = await _boardRepository.GetAll(cancellationToken)
+            };;
         }
     }
 }

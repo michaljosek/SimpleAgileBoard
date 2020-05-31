@@ -7,7 +7,6 @@
   <ItemGroup>
     <Folder Include="Boards\" />
     <Folder Include="Lanes\" />
-    <Folder Include="Lanes\Queries" />
     <Folder Include="Notes\" />
   </ItemGroup>
 

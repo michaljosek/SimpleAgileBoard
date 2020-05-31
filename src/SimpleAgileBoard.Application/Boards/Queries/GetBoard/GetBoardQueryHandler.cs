@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using SimpleAgileBoard.Application.Boards.Services;
 
 namespace SimpleAgileBoard.Application.Boards.Queries.GetBoard
 {
@@ -15,12 +16,12 @@ namespace SimpleAgileBoard.Application.Boards.Queries.GetBoard
         
         public async Task<BoardViewModel> Handle(GetBoardQuery request, CancellationToken cancellationToken)
         {
-            var board = _boardRepository.Get(request.BoardId);
+            var board = await _boardRepository.Get(request.BoardId, cancellationToken);
 
-            return await Task.FromResult(new BoardViewModel
+            return new BoardViewModel
             {
                 Board = board
-            });
+            };
         }
     }
 }

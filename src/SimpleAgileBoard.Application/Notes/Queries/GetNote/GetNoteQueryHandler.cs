@@ -2,27 +2,27 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using SimpleAgileBoard.Domain.Interfaces;
+using SimpleAgileBoard.Application.Notes.Services;
 
 namespace SimpleAgileBoard.Application.Notes.Queries.GetNote
 {
     public class GetNoteQueryHandler : IRequestHandler<GetNoteQuery, NoteViewModel>
     {
-        private readonly IApplicationDbContext _applicationDbContext;
+        private readonly INoteRepository _noteRepository;
 
-        public GetNoteQueryHandler(IApplicationDbContext applicationDbContext)
+        public GetNoteQueryHandler(INoteRepository noteRepository)
         {
-            _applicationDbContext = applicationDbContext;
+            _noteRepository = noteRepository;
         }
         
         public async Task<NoteViewModel> Handle(GetNoteQuery request, CancellationToken cancellationToken)
         {
-            var note = _applicationDbContext.Notes.FirstOrDefault(x => x.NoteId == request.NoteId);
+            var note = await _noteRepository.Get(request.NoteId, cancellationToken);
             
-            return await Task.FromResult(new NoteViewModel
+            return new NoteViewModel
             {
                 Note = note
-            });
+            };
         }
     }
 }

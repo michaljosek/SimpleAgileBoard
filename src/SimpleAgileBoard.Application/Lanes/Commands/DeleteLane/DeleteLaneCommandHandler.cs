@@ -2,32 +2,29 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using SimpleAgileBoard.Application.Boards.Queries;
 using SimpleAgileBoard.Application.Boards.Queries.GetBoard;
-using SimpleAgileBoard.Domain.Interfaces;
+using SimpleAgileBoard.Application.Boards.Services;
+using SimpleAgileBoard.Application.Lanes.Services;
 
 namespace SimpleAgileBoard.Application.Lanes.Commands.DeleteLane
 {
     public class DeleteLaneCommandHandler : IRequestHandler<DeleteLaneCommand, BoardViewModel>
     {
         private readonly IBoardRepository _boardRepository;
-        private readonly IApplicationDbContext _applicationDbContext;
+        private readonly ILaneRepository _laneRepository;
 
-        public DeleteLaneCommandHandler(IBoardRepository boardRepository, IApplicationDbContext applicationDbContext)
+        public DeleteLaneCommandHandler(IBoardRepository boardRepository, ILaneRepository laneRepository)
         {
             _boardRepository = boardRepository;
-            _applicationDbContext = applicationDbContext;
+            _laneRepository = laneRepository;
         }
         
         public async Task<BoardViewModel> Handle(DeleteLaneCommand request, CancellationToken cancellationToken)
         {
-            var lane = _applicationDbContext.Lanes
-                .FirstOrDefault(x => x.LaneId == request.LaneId);
+            var lane = await _laneRepository.Get(request.LaneId, cancellationToken);
 
-            _applicationDbContext.Lanes.Remove(lane);
-            await _applicationDbContext.SaveChangesAsync(cancellationToken);
-
-            var board = _boardRepository.Get(request.BoardId);
+            await _laneRepository.Remove(lane, cancellationToken);
+            var board = await _boardRepository.Get(request.BoardId, cancellationToken);
 
             return new BoardViewModel
             {

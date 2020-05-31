@@ -62,7 +62,7 @@ class Board extends React.PureComponent {
     }
 
     addNote = (e) => {
-        this.props.boardActions.addNote(e);
+        this.props.boardActions.addNote(e, this.props.boardId);
         this.handleAddNoteModal();
     }
 

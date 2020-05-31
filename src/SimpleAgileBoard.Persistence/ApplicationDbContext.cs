@@ -12,7 +12,7 @@ namespace SimpleAgileBoard.Persistence
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
-
+        
         public DbSet<Board> Boards { get; set; }
         public DbSet<Lane> Lanes { get; set; }
         public DbSet<Note> Notes { get; set; }
@@ -21,6 +21,11 @@ namespace SimpleAgileBoard.Persistence
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+        }
+
+        public DbContext GetDbContext()
+        {
+            return this;
         }
     }
 }

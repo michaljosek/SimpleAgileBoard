@@ -1,45 +1,38 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
+using SimpleAgileBoard.Application.Boards.Queries;
 using SimpleAgileBoard.Application.Boards.Queries.GetBoards;
-using SimpleAgileBoard.Domain.Entities;
-using SimpleAgileBoard.Domain.Extensions;
-using SimpleAgileBoard.Domain.Interfaces;
+using SimpleAgileBoard.Application.Boards.Services;
 
 namespace SimpleAgileBoard.Application.Boards.Commands.DeleteBoard
 {
     public class DeleteBoardCommandHandler : IRequestHandler<DeleteBoardCommand, BoardsViewModel>
     {
-        private readonly IApplicationDbContext _applicationDbContext;
+        private readonly IBoardRepository _boardRepository;
 
-        public DeleteBoardCommandHandler(IApplicationDbContext applicationDbContext)
+        public DeleteBoardCommandHandler(IBoardRepository boardRepository)
         {
-            _applicationDbContext = applicationDbContext;
+            _boardRepository = boardRepository;
         }
         
         public async Task<BoardsViewModel> Handle(DeleteBoardCommand request, CancellationToken cancellationToken)
         {
-            var board = GetBoard(request.BoardId);
-
-            _applicationDbContext.Boards.Remove(board);
-            await _applicationDbContext.SaveChangesAsync(cancellationToken);
-
-            var boards = _applicationDbContext.Boards.ToList();
+            var board = await _boardRepository.Get(request.BoardId, cancellationToken);
+            if (board == null)
+            {
+                throw new Exception(); //todo custom exception
+            }
+            
+            await _boardRepository.Remove(board, cancellationToken);
+            var boards = await _boardRepository.GetAll(cancellationToken);
 
             return new BoardsViewModel
             {
                 Boards = boards
             };
-        }
-        
-        private Board GetBoard(int boardId)
-        {
-            var board = _applicationDbContext.Boards
-                .FirstOrDefault(x => x.BoardId == boardId);
-
-            return board;
         }
     }
 }

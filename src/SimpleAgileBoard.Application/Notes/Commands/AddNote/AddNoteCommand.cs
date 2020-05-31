@@ -5,6 +5,7 @@ namespace SimpleAgileBoard.Application.Notes.Commands.AddNote
 {
     public class AddNoteCommand : IRequest<BoardViewModel>
     {
+        public int BoardId { get; set; }
         public int LaneId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }

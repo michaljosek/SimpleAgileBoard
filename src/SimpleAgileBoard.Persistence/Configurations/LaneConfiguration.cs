@@ -11,17 +11,17 @@ namespace SimpleAgileBoard.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Lane> builder)
         {
-            builder.Property(x => x.LaneId)
+            builder.Property(x => x.Id)
                 .ValueGeneratedOnAdd();
 
-            builder.HasKey(x => x.LaneId);
+            builder.HasKey(x => x.Id);
 
             builder.Property(x => x.BoardId);
             builder.HasIndex(x => x.BoardId);
             
             builder.HasOne<Board>()
                 .WithMany(x => x.Lanes)
-                .HasPrincipalKey(x => x.BoardId)
+                .HasPrincipalKey(x => x.Id)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

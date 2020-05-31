@@ -6,9 +6,9 @@ using SimpleAgileBoard.Domain.Interfaces;
 
 namespace SimpleAgileBoard.Domain.Entities
 {
-    public class Lane : ISortIndex
+    public class Lane : ISortIndex, IBaseEntity
     {
-        public int LaneId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public List<Note> Notes { get; set; }
         public int SortIndex { get; set; }

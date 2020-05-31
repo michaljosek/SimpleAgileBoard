@@ -11,10 +11,10 @@ namespace SimpleAgileBoard.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Board> builder)
         {
-            builder.Property(x => x.BoardId)
+            builder.Property(x => x.Id)
                 .ValueGeneratedOnAdd();
 
-            builder.HasKey(x => x.BoardId);
+            builder.HasKey(x => x.Id);
         }
     }
 }

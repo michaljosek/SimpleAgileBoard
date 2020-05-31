@@ -11,5 +11,6 @@ namespace SimpleAgileBoard.Domain.Interfaces
         public DbSet<Lane> Lanes { get; set; }
         public DbSet<Note> Notes { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken());
+        DbContext GetDbContext();
     }
 }
