@@ -30,6 +30,7 @@ namespace SimpleAgileBoard.Application.User.Services
             {
                 UserName = command.Username,
                 Email = command.Email,
+                EmailConfirmed = true
             };
             var userWithSameEmail = await _userManager.FindByEmailAsync(command.Email);
             if (userWithSameEmail == null)
