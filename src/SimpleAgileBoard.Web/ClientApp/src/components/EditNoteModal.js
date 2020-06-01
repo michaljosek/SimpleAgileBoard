@@ -3,7 +3,7 @@ import Modal from "react-modal"
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 
-const EditNoteModal = ({ isEditNoteModalOpen, editNoteModal, editNote, editNoteUpdate, lanes }) =>
+const EditNoteModal = ({ isEditNoteModalOpen, editNoteModal, editNote, editNoteUpdate, lanes, boardId, changeLane }) =>
   <Modal
     isOpen={isEditNoteModalOpen}
     handleModalClick={editNoteModal}
@@ -12,6 +12,19 @@ const EditNoteModal = ({ isEditNoteModalOpen, editNoteModal, editNote, editNoteU
     ariaHideApp={false}
   >
       <div>
+      <form onChange={(e) => changeLane(e, editNote.id, boardId)}>
+            <div className="form-group row">
+                <label className="col-sm-2 col-form-label">Move to other lane</label>
+                <div className="col-sm-10">
+                <select>
+                {lanes.map(lane => 
+                    <option value={lane.id}>{lane.name}</option>
+                )}
+            </select>
+                </div>
+            </div>
+            
+        </form> 
         <form>
             <input id="formEditNoteNoteId" defaultValue={editNote.id} hidden />
             <div className="form-group row">

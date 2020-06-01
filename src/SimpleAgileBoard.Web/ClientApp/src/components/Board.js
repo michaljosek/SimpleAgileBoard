@@ -84,6 +84,11 @@ class Board extends React.PureComponent {
         return this.props.roles.includes('Administrator');
     }
 
+    changeLane = (e, noteId, boardId) => {
+        this.props.boardActions.moveNoteToLane(e, noteId, boardId);
+        this.handleEditNoteModal(emptyNote);
+    }
+
     render() {
         return (
             <div>
@@ -130,6 +135,8 @@ class Board extends React.PureComponent {
                             editNote={this.state.editNote}
                             editNoteUpdate={this.editNoteUpdate}
                             lanes={this.props.lanes}
+                            boardId={this.props.boardId}
+                            changeLane={this.changeLane}
                         />
                         <AddLaneModal 
                             isAddLaneModalOpen={this.state.isAddLaneModalOpen}

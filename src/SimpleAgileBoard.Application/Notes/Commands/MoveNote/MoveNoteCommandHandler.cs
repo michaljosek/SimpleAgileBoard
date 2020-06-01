@@ -30,7 +30,6 @@ namespace SimpleAgileBoard.Application.Notes.Commands.MoveNote
                 throw new NotFoundException(nameof(lane), request.LaneId);
             }
             
-            //todo service
             lane.Notes.Move(request.NoteIndex, request.MoveUp);
             await _laneRepository.Update(lane, cancellationToken);
             var board = await _boardRepository.Get(request.BoardId, cancellationToken);

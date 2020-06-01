@@ -108,6 +108,18 @@ export const boardActionsCreators = {
                 });
             }
         },
+        moveNoteToLane: (e, noteId, boardId) => {
+            const newLaneId = Number(e.target.value);
+
+            return (dispatch, getState) => {
+                apiFetch('api/note/moveToLane', dispatch, { boardId, noteId, newLaneId })
+                .then(data => {
+                    dispatch(setBoard(types.SET_BOARD, data.board));
+                }).catch((error) => {
+                    alert(error);
+                });
+            }
+        },
     }
 
 

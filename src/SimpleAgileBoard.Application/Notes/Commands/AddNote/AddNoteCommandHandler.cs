@@ -24,6 +24,12 @@ namespace SimpleAgileBoard.Application.Notes.Commands.AddNote
         
         public async Task<BoardViewModel> Handle(AddNoteCommand request, CancellationToken cancellationToken)
         {
+            var board = await _boardRepository.Get(request.BoardId, cancellationToken);
+            if (board == null)
+            {
+                throw new NotFoundException(nameof(board), request.BoardId);
+            }
+
             var lane = await _laneRepository.Get(request.LaneId, cancellationToken);
             if (lane == null)
             {
@@ -33,16 +39,14 @@ namespace SimpleAgileBoard.Application.Notes.Commands.AddNote
             var note = new Note
             {
                 Title = request.Title,
-                Description = request.Description
+                Description = request.Description,
+                NoteBoardId = $"{board.NotePrefix}-{board.NoteCounter}",
+                SortIndex = lane.Notes.Count
             };
 
             lane.AddNote(note);
             await _laneRepository.Update(lane, cancellationToken);
-            var board = await _boardRepository.Get(request.BoardId, cancellationToken);
-            if (board == null)
-            {
-                throw new NotFoundException(nameof(board), request.BoardId);
-            }
+
             
             return new BoardViewModel
             {

@@ -6,6 +6,7 @@ using SimpleAgileBoard.Application.Notes.Commands.AddNote;
 using SimpleAgileBoard.Application.Notes.Commands.DeleteNote;
 using SimpleAgileBoard.Application.Notes.Commands.EditNote;
 using SimpleAgileBoard.Application.Notes.Commands.MoveNote;
+using SimpleAgileBoard.Application.Notes.Commands.MoveNoteToLane;
 using SimpleAgileBoard.Application.Notes.Queries.GetNote;
 
 namespace Boilerplate.Controllers
@@ -45,6 +46,13 @@ namespace Boilerplate.Controllers
         [HttpPost]
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<BoardViewModel>> Move([FromBody]MoveNoteCommand command)
+        {
+            return Ok(await Mediator.Send(command));
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public async Task<ActionResult<BoardViewModel>> MoveToLane([FromBody]MoveNoteToLaneCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
