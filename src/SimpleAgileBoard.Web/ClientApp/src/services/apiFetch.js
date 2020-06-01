@@ -1,3 +1,5 @@
+import { store } from '../index';
+
 const apiFetch = (url, dispatch, body, method = 'POST') => {
     const fetchBody = {
         method,
@@ -8,7 +10,10 @@ const apiFetch = (url, dispatch, body, method = 'POST') => {
         fetchBody['body'] = JSON.stringify(body);
     }
 
+    const jwtToken = store.getState().user.token;
+
     fetchBody['headers'] = { 
+        'Authorization': 'Bearer ' + jwtToken,
         'Content-Type': 'application/json' 
     }    
     
@@ -18,6 +23,9 @@ const apiFetch = (url, dispatch, body, method = 'POST') => {
         .then(response => {
             if('title' in response) {
                 reject(response.title);
+            }
+            if('error' in response) {
+                reject(response.error);
             }
 
             return response;

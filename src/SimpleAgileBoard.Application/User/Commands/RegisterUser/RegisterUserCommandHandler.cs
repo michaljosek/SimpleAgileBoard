@@ -6,7 +6,7 @@ using SimpleAgileBoard.Application.User.Services;
 
 namespace SimpleAgileBoard.Application.User.Commands.RegisterUser
 {
-    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, string>
+    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, RegisterViewModel>
     {
         private readonly IUserService _userService;
 
@@ -14,10 +14,15 @@ namespace SimpleAgileBoard.Application.User.Commands.RegisterUser
         {
             _userService = userService;
         }
-        
-        public async Task<string> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+
+        public async Task<RegisterViewModel> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
-            return await _userService.RegisterAsync(request);
+            var message = await _userService.RegisterAsync(request);
+
+            return new RegisterViewModel
+            {
+                Message = message
+            };
         }
     }
 }

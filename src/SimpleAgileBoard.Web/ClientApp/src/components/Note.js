@@ -50,23 +50,28 @@ class Note extends React.PureComponent {
                             <h5 className="card-title">{this.props.note.noteBoardId}</h5>
                             <p className="card-text">{this.props.note.title}</p>
 
-                            <div className="pull-left action-buttons">
-                                {this.shouldRenderMoveNoteUpButton() &&
-                                    <button onClick={this.moveNoteUp} className="btn btn-sm">
-                                        <FontAwesomeIcon icon={faArrowUp} />
-                                    </button>
-                                }
-                                {this.shouldRenderMoveNoteDownButton() &&
-                                    <button onClick={this.moveNoteDown} className="btn btn-sm">
-                                        <FontAwesomeIcon icon={faArrowDown} />
-                                    </button>
-                                }
-                            </div>
+                            {this.props.isAdministrator &&
+                                <div className="pull-left action-buttons">
+                                    {this.shouldRenderMoveNoteUpButton() &&
+                                        <button onClick={this.moveNoteUp} className="btn btn-sm">
+                                            <FontAwesomeIcon icon={faArrowUp} />
+                                        </button>
+                                    }
+                                    {this.shouldRenderMoveNoteDownButton() &&
+                                        <button onClick={this.moveNoteDown} className="btn btn-sm">
+                                            <FontAwesomeIcon icon={faArrowDown} />
+                                        </button>
+                                    }
+                                </div>
+                            }
+                            
                             <div className="pull-right action-buttons">
                                 <button onClick={this.detailsNoteModal} className="btn btn-sm">
                                     <FontAwesomeIcon icon={faInfoCircle}/>
                                 </button>
 
+                                {this.props.isAdministrator &&
+                                <>
                                 <button onClick={this.editNoteModal} className="btn btn-sm">
                                     <FontAwesomeIcon icon={faEdit}/>
                                 </button>
@@ -74,6 +79,8 @@ class Note extends React.PureComponent {
                                 <button onClick={this.deleteNote} className="btn btn-sm">
                                     <FontAwesomeIcon icon={faTrash}/>
                                 </button>
+                                </>}
+                                
                             </div>
                         </div>
                     </div>

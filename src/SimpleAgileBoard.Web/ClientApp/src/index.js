@@ -36,7 +36,7 @@ const userStore = () => {
     });
 }
 
-const store = userStore();
+export const store = userStore();
 
 
 ReactDOM.render(

@@ -5,6 +5,7 @@ import { boardActionsCreators } from '../actions/Board';
 import BoardList from './Board/BoardList'
 import AddBoardModal from './Board/AddBoardModal';
 import EditBoardModal from './Board/EditBoardModal';
+import { userActionsCreators } from '../actions/User';
 
 const emptyBoard = {
     name: "",
@@ -48,17 +49,25 @@ class Home extends React.PureComponent {
         this.handleEditBoardModal(emptyBoard);
     }
 
+    isAdministrator = () => {
+        return this.props.roles.includes('Administrator');
+    }
+
     render() {
         return (
             <div>
                 <div className="container">
-                    <div className="row">
-                        <button type="button" className="btn btn-primary right5" onClick={this.handleAddBoardModal}>Add board</button>
-                    </div>
+                    {this.isAdministrator() &&
+                        <div className="row">
+                            <button type="button" className="btn btn-primary right5" onClick={this.handleAddBoardModal}>Add board</button>
+                        </div>
+                    }
+                    
                     <div className="row top5">
                         <BoardList 
                             boards={this.props.boards}
                             editBoardModal={this.handleEditBoardModal}
+                            isAdministrator={this.isAdministrator()}
                         />
                     </div>
                     
@@ -82,6 +91,7 @@ class Home extends React.PureComponent {
 function mapDispatchToProps(dispatch) {
     return {
         boardActions: bindActionCreators(boardActionsCreators, dispatch),
+        userActions: bindActionCreators(userActionsCreators, dispatch)
     }
   }
 

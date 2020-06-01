@@ -1,6 +1,7 @@
 import * as types from './type.js'
 import apiFetch from '../services/apiFetch';
 import { history } from '../index';
+import { store } from '../index';
 
 export const userActionsCreators = {
         login: (event) => {
@@ -30,9 +31,21 @@ export const userActionsCreators = {
                 localStorage.removeItem('user');
                 history.push('/');
             }
+        },
+        register: (event) => {
+            const email = event.target.form.elements.emailRegister.value;
+            const password = event.target.form.elements.passwordRegister.value;
+
+            return (dispatch, getState) => {
+                apiFetch('api/user/register', dispatch, { email, password })
+                .then(data => {
+                    alert(data.message);
+                }).catch((error) => {
+                    console.log(error);
+                });
+            }
         }
     }
-
 
 export const setToken = (type, data) => {
     return {

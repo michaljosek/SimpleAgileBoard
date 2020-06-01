@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using SimpleAgileBoard.Application.Common.Exceptions;
 using SimpleAgileBoard.Application.Common.Models;
 using SimpleAgileBoard.Application.User.Commands.RegisterUser;
 using SimpleAgileBoard.Application.User.Queries.GetToken;
@@ -28,24 +29,25 @@ namespace SimpleAgileBoard.Application.User.Services
         {
             var user = new ApplicationUser
             {
-                UserName = command.Username,
+                UserName = command.Email,
                 Email = command.Email,
                 EmailConfirmed = true
             };
             var userWithSameEmail = await _userManager.FindByEmailAsync(command.Email);
-            if (userWithSameEmail == null)
+            if (userWithSameEmail != null)
             {
-                var result = await _userManager.CreateAsync(user, command.Password);
-                if (result.Succeeded)
-                {
-                    await _userManager.AddToRoleAsync(user, Authorization.DEFAULT_ROLE.ToString());                 
-                }
-                return $"User Registered with username {user.UserName}";
+                return $"Email {user.Email} is already registered.";
             }
-            else
+
+            var result = await _userManager.CreateAsync(user, command.Password);
+            if (!result.Succeeded)
             {
-                return $"Email {user.Email } is already registered.";
+                return string.Join(" ", result.Errors.Select(x => x.Description));
             }
+
+            await _userManager.AddToRoleAsync(user, Authorization.DEFAULT_ROLE.ToString());
+
+            return $"User Registered with username {user.UserName}";
         }
 
         public async Task<AuthenticationModel> GetTokenAsync(GetTokenQuery query)
@@ -54,28 +56,26 @@ namespace SimpleAgileBoard.Application.User.Services
             var user = await _userManager.FindByEmailAsync(query.Email);
             if (user == null)
             {
-                authenticationModel.IsAuthenticated = false;
-                authenticationModel.Message = $"No Accounts Registered with {query.Email}.";
-                return authenticationModel;
+                throw new IncorrectCredentialsException(query.Email);
             }
-            
-            if (await _userManager.CheckPasswordAsync(user, query.Password))
+
+            if (!await _userManager.CheckPasswordAsync(user, query.Password))
             {
-                authenticationModel.IsAuthenticated = true;
-                var jwtSecurityToken = await CreateJwtToken(user);
-                authenticationModel.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-                authenticationModel.Email = user.Email;
-                authenticationModel.UserName = user.UserName;
-                var rolesList = await _userManager.GetRolesAsync(user).ConfigureAwait(false);
-                authenticationModel.Roles = rolesList.ToList();
-                return authenticationModel;
+                throw new IncorrectCredentialsException(query.Email);
+
             }
-            
-            authenticationModel.IsAuthenticated = false;
-            authenticationModel.Message = $"Incorrect Credentials for user {user.Email}.";
+
+            authenticationModel.IsAuthenticated = true;
+            var jwtSecurityToken = await CreateJwtToken(user);
+            authenticationModel.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+            authenticationModel.Email = user.Email;
+            authenticationModel.UserName = user.UserName;
+            var rolesList = await _userManager.GetRolesAsync(user).ConfigureAwait(false);
+            authenticationModel.Roles = rolesList.ToList();
             return authenticationModel;
+
         }
-        
+
         private async Task<JwtSecurityToken> CreateJwtToken(ApplicationUser user)
         {
             var userClaims = await _userManager.GetClaimsAsync(user);

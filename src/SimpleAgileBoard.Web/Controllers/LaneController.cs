@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SimpleAgileBoard.Application.Boards.Queries.GetBoard;
 using SimpleAgileBoard.Application.Lanes.Commands.AddLane;
@@ -6,6 +7,7 @@ using SimpleAgileBoard.Application.Lanes.Commands.DeleteLane;
 
 namespace Boilerplate.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class LaneController : BaseController
     {
         [HttpPost]

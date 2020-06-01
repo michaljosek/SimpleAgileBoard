@@ -44,6 +44,9 @@ namespace Boilerplate.Common
                 case NotFoundException _:
                     code = HttpStatusCode.NotFound;
                     break;
+                case IncorrectCredentialsException _:
+                    code = HttpStatusCode.BadRequest;
+                    break;
             }
 
             context.Response.ContentType = "application/json";

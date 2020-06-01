@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SimpleAgileBoard.Application.Boards.Commands.AddBoard;
 using SimpleAgileBoard.Application.Boards.Commands.DeleteBoard;
@@ -27,18 +28,21 @@ namespace Boilerplate.Controllers
         }
         
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<BoardsViewModel>> Edit([FromBody]EditBoardCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
         
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<BoardsViewModel>> Add([FromBody]AddBoardCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
         
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<BoardsViewModel>> Delete([FromBody]DeleteBoardCommand command)
         {
             return Ok(await Mediator.Send(command));

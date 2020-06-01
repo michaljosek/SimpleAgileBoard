@@ -4,12 +4,11 @@ import apiFetch from '../services/apiFetch';
 export const boardActionsCreators = {
     getBoard: (boardId) => {
         return (dispatch, getState) => {
-            fetch(`api/board/get/` + boardId)
-                   .then(response => response.json())
-                   .then(data => {
-                       dispatch(setBoard(types.SET_BOARD, data.board));
-                   }).catch((error) => {
-                    alert(error);
+                apiFetch(`api/board/get/` + boardId, dispatch, null, 'GET')
+                .then(data => {
+                    dispatch(setBoard(types.SET_BOARD, data.board));
+                }).catch((error) => {
+                 alert(error);
                 });
            }
         },
@@ -63,12 +62,11 @@ export const boardActionsCreators = {
         },
         getBoards: () => {
             return (dispatch, getState) => {
-                fetch(`api/board/getAll`)
-                       .then(response => response.json())
-                       .then(data => {
-                           dispatch(setBoard(types.SET_BOARDS, data.boards));
+                apiFetch(`api/board/getAll`, dispatch, null, 'GET')
+                .then(data => {
+                    dispatch(setBoard(types.SET_BOARDS, data.boards));
                 }).catch((error) => {
-                    alert(error);
+                 alert(error);
                 });
             }
         },

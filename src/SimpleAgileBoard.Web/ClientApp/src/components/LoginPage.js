@@ -12,13 +12,19 @@ class LoginPage extends React.Component {
         this.props.userActions.login(e);
     }
 
+    register = (e) => {
+        e.preventDefault();
+        this.props.userActions.register(e);
+    }
+
     render() {
         return (
-            <div className="col-md-6 col-md-offset-3">
+            <div>
+<div className="col-md-6 col-md-offset-3">
                 <h2>Login</h2>
                 <form>
                     <div className='form-group'>
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="email">Email</label>
                         <input type="text" className="form-control" name="emailLogin" />
                     </div>
                     <div className='form-group'>
@@ -30,6 +36,24 @@ class LoginPage extends React.Component {
                     </div>
                 </form>
             </div>
+            <div className="col-md-6 col-md-offset-3">
+            <h2>Register</h2>
+            <form>
+                <div className='form-group'>
+                    <label htmlFor="username">Email</label>
+                    <input type="text" className="form-control" name="emailRegister" />
+                </div>
+                <div className='form-group'>
+                    <label htmlFor="password">Password</label>
+                    <input type="password" className="form-control" name="passwordRegister"  />
+                </div>
+                <div className="form-group">
+                    <button className="btn btn-primary" onClick={this.register}>Register</button>
+                </div>
+            </form>
+        </div>
+            </div>
+            
         );
     }
 }

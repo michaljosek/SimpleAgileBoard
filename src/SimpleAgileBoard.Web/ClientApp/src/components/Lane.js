@@ -21,11 +21,16 @@ class Lane extends React.PureComponent {
                     <ul className="list-group">
                             <li className="list-group-item list-group-item-primary">
                                 {this.props.lane.name}
-                                <div className="pull-right action-buttons">
-                                    <button onClick={this.deleteLane} className="btn btn-sm">
-                                        <FontAwesomeIcon icon={faTrash}/>
-                                    </button>
-                                </div>
+                                {this.props.isAdministrator &&
+                                <>
+                                    <div className="pull-right action-buttons">
+                                        <button onClick={this.deleteLane} className="btn btn-sm">
+                                            <FontAwesomeIcon icon={faTrash}/>
+                                        </button>
+                                    </div>
+                                </>
+                                }
+                                
                             </li>
                             {this.props.lane.notes.map(note => 
                                 <Note 
@@ -37,6 +42,7 @@ class Lane extends React.PureComponent {
                                     editNoteModal={this.props.editNoteModal}
                                     moveNote={this.props.moveNote}
                                     notesCount={this.props.lane.notes.length}
+                                    isAdministrator={this.props.isAdministrator}
                                 />
                             )}
                         </ul>

@@ -80,14 +80,22 @@ class Board extends React.PureComponent {
         this.props.boardActions.moveNote(noteIndex, laneId, boardId, moveUp);
     }
 
+    isAdministrator = () => {
+        return this.props.roles.includes('Administrator');
+    }
+
     render() {
         return (
             <div>
                 <div className="container">
-                    <div className="row top5">
-                        <button type="button" className="btn btn-primary right5" onClick={this.handleAddNoteModal}>Add note</button>
-                        <button type="button" className="btn btn-primary right5" onClick={this.handleAddLaneModal}>Add lane</button>
-                    </div>
+                    {this.isAdministrator() &&
+                    <>
+                        <div className="row top5">
+                            <button type="button" className="btn btn-primary right5" onClick={this.handleAddNoteModal}>Add note</button>
+                            <button type="button" className="btn btn-primary right5" onClick={this.handleAddLaneModal}>Add lane</button>
+                        </div>
+                    </>}
+                    
                     <div className="row top5 text-center">
                         <div className="alert alert-info alert-link">{this.props.name}</div>
                     </div>
@@ -101,6 +109,7 @@ class Board extends React.PureComponent {
                                 detailsNoteModal={this.handleDetailsNoteModal}
                                 editNoteModal={this.handleEditNoteModal}
                                 moveNote={this.moveNote}
+                                isAdministrator={this.isAdministrator()}
                             />
                         )}
 

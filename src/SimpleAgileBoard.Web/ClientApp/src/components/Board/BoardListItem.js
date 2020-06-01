@@ -25,7 +25,10 @@ class BoardListItem extends React.PureComponent {
                 View
               </a>
             </td>
-            <td>
+            {
+              this.props.isAdministrator &&
+              <>
+                          <td>
               <button onClick={this.editBoardModal} className="btn btn-primary btn-sm">
                 Edit
               </button>
@@ -34,7 +37,9 @@ class BoardListItem extends React.PureComponent {
               <button onClick={this.deleteBoard} className="btn btn-primary btn-sm">
                 Delete
               </button>
-            </td>
+            </td></>
+            }
+
         </tr>
        </React.Fragment>
     );
