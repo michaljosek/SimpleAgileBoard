@@ -2,6 +2,6 @@
 {
     public interface IBaseEntity
     {
-        public int Id { get; set; }
+        int Id { get; set; }
     }
 }

@@ -1,15 +1,22 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { userActionsCreators } from '../actions/User';
 import './NavMenu.css';
 
-export default class NavMenu extends React.PureComponent {
+class NavMenu extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
             isOpen: false
         };
 
+    }
+
+    logout = () => {
+        this.props.userActions.logout();
     }
 
     render() {
@@ -21,9 +28,11 @@ export default class NavMenu extends React.PureComponent {
                         <NavbarToggler onClick={() => this._toggle} className="mr-2" />
                         <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={this.state.isOpen} navbar>
                             <ul className="navbar-nav flex-grow">
-                                <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/">Logout</NavLink>
-                                </NavItem>
+                                {this.props.isAuthenticated &&
+                                        <a onClick={this.logout}>
+                                        Logout
+                                      </a>
+                                }
                             </ul>
                         </Collapse>
                     </Container>
@@ -38,3 +47,14 @@ export default class NavMenu extends React.PureComponent {
         });
     }
 }
+function mapDispatchToProps(dispatch) {
+    return {
+        userActions: bindActionCreators(userActionsCreators, dispatch),
+    }
+  }
+
+function mapStateToProps(state) {
+    return Object.assign({}, state.user);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavMenu);

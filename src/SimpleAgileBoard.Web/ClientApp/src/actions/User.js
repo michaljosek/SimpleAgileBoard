@@ -11,6 +11,13 @@ export const userActionsCreators = {
                 apiFetch('api/user/token', dispatch, { email, password })
                 .then(data => {
                     dispatch(setToken(types.SET_TOKEN, data));
+                    const user = {
+                        token: data.token,
+                        isAuthenticated: data.isAuthenticated,
+                        roles: data.roles
+                    };
+                    localStorage.setItem('user', JSON.stringify(user));
+
                     history.push('/');
                 }).catch((error) => {
                     alert(error);
@@ -20,6 +27,7 @@ export const userActionsCreators = {
         logout: () => {
             return (dispatch, getState) => {
                 dispatch(setToken(types.SET_TOKEN, undefined));
+                localStorage.removeItem('user');
                 history.push('/');
             }
         }

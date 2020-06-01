@@ -7,9 +7,9 @@ namespace SimpleAgileBoard.Domain.Interfaces
 {
     public interface IApplicationDbContext
     {
-        public DbSet<Board> Boards { get; set; }
-        public DbSet<Lane> Lanes { get; set; }
-        public DbSet<Note> Notes { get; set; }
+        DbSet<Board> Boards { get; set; }
+        DbSet<Lane> Lanes { get; set; }
+        DbSet<Note> Notes { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken());
         DbContext GetDbContext();
     }

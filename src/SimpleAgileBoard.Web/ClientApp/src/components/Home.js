@@ -86,7 +86,7 @@ function mapDispatchToProps(dispatch) {
   }
 
 function mapStateToProps(state) {
-    return Object.assign({}, state.boards);
+    return Object.assign({}, state.boards, state.user);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Home));

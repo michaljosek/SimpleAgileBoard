@@ -15,7 +15,28 @@ const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 export const history = createBrowserHistory({ basename: baseUrl });
 // Get the application-wide store instance, prepopulating with state from the server where available.
 // const store = configureStore(history, board = unloadedState );
-const store = configureStore(history);
+
+const userStore = () => {
+    const serializedState = localStorage.getItem('user')
+    if (serializedState === null) { // The key 'state' does not exist.
+        return configureStore(history)            // Let our reducer initialize the app.
+    }
+    
+    const user = JSON.parse(serializedState);
+    if (user === null) {
+        return configureStore(history);
+    }
+    
+    return configureStore(history, {
+        user: {
+            token: user.token,
+            isAuthenticated: user.isAuthenticated,
+            roles: user.roles
+        }
+    });
+}
+
+const store = userStore();
 
 
 ReactDOM.render(

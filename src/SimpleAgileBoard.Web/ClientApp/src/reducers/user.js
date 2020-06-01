@@ -10,7 +10,7 @@ export const unloadedUserState = {
 
 export const user = createReducer(unloadedUserState, {
     [types.SET_TOKEN](state, action) {
-        if (state === undefined || action === undefined) {
+        if (state === undefined || action.data === undefined) {
             return unloadedUserState;
         }
 

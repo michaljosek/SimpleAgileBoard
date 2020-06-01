@@ -143,7 +143,7 @@ function mapDispatchToProps(dispatch) {
   }
 
 function mapStateToProps(state) {
-    return Object.assign({}, state.board);
+    return Object.assign({}, state.board, state.user);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board);
