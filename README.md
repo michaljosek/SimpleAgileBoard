@@ -21,3 +21,8 @@ Apply migrations running command in PowerShell (SimpleAgileBoard.Persistence pro
     dotnet ef database update
 
 Open solution in Visual studio and start application (it might take a while for the first time since all npm packages will be downloaded).
+
+Example admin credentials:
+
+* Email: "admin@admin.com"
+* Password: "admin"
