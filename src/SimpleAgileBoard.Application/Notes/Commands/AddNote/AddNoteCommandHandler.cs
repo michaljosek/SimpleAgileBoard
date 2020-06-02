@@ -47,7 +47,12 @@ namespace SimpleAgileBoard.Application.Notes.Commands.AddNote
             lane.AddNote(note);
             await _laneRepository.Update(lane, cancellationToken);
 
-            
+            board = await _boardRepository.Get(request.BoardId, cancellationToken);
+            if (board == null)
+            {
+                throw new NotFoundException(nameof(board), request.BoardId);
+            }
+
             return new BoardViewModel
             {
                 Board = board

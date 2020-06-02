@@ -4,7 +4,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using SimpleAgileBoard.Application.Common.Exceptions;
@@ -17,11 +16,11 @@ namespace SimpleAgileBoard.Application.User.Services
 {
     public class UserService : IUserService
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IUserManagerWrapper _userManagerWrapper;
         private readonly JWT _jwt;
-        public UserService(UserManager<ApplicationUser> userManager, IOptions<JWT> jwt)
+        public UserService(IUserManagerWrapper userManagerWrapper, IOptions<JWT> jwt)
         {
-            _userManager = userManager;
+            _userManagerWrapper = userManagerWrapper;
             _jwt = jwt.Value;
         }
 
@@ -33,19 +32,19 @@ namespace SimpleAgileBoard.Application.User.Services
                 Email = command.Email,
                 EmailConfirmed = true
             };
-            var userWithSameEmail = await _userManager.FindByEmailAsync(command.Email);
+            var userWithSameEmail = await _userManagerWrapper.FindByEmailAsync(command.Email);
             if (userWithSameEmail != null)
             {
                 return $"Email {user.Email} is already registered.";
             }
 
-            var result = await _userManager.CreateAsync(user, command.Password);
+            var result = await _userManagerWrapper.CreateAsync(user, command.Password);
             if (!result.Succeeded)
             {
                 return string.Join(" ", result.Errors.Select(x => x.Description));
             }
 
-            await _userManager.AddToRoleAsync(user, Authorization.DEFAULT_ROLE.ToString());
+            await _userManagerWrapper.AddToRoleAsync(user, Authorization.DEFAULT_ROLE.ToString());
 
             return $"User Registered with username {user.UserName}";
         }
@@ -53,13 +52,13 @@ namespace SimpleAgileBoard.Application.User.Services
         public async Task<AuthenticationModel> GetTokenAsync(GetTokenQuery query)
         {
             var authenticationModel = new AuthenticationModel();
-            var user = await _userManager.FindByEmailAsync(query.Email);
+            var user = await _userManagerWrapper.FindByEmailAsync(query.Email);
             if (user == null)
             {
                 throw new IncorrectCredentialsException(query.Email);
             }
 
-            if (!await _userManager.CheckPasswordAsync(user, query.Password))
+            if (!await _userManagerWrapper.CheckPasswordAsync(user, query.Password))
             {
                 throw new IncorrectCredentialsException(query.Email);
 
@@ -70,7 +69,7 @@ namespace SimpleAgileBoard.Application.User.Services
             authenticationModel.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
             authenticationModel.Email = user.Email;
             authenticationModel.UserName = user.UserName;
-            var rolesList = await _userManager.GetRolesAsync(user).ConfigureAwait(false);
+            var rolesList = await _userManagerWrapper.GetRolesAsync(user).ConfigureAwait(false);
             authenticationModel.Roles = rolesList.ToList();
             return authenticationModel;
 
@@ -78,8 +77,8 @@ namespace SimpleAgileBoard.Application.User.Services
 
         private async Task<JwtSecurityToken> CreateJwtToken(ApplicationUser user)
         {
-            var userClaims = await _userManager.GetClaimsAsync(user);
-            var roles = await _userManager.GetRolesAsync(user);
+            var userClaims = await _userManagerWrapper.GetClaimsAsync(user);
+            var roles = await _userManagerWrapper.GetRolesAsync(user);
             var roleClaims = roles.Select(t => new Claim("roles", t)).ToList();
 
             var claims = new[]
