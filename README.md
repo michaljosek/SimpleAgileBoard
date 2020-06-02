@@ -1,8 +1,8 @@
 # SimpleAgileBoard
 
-Requirements to run on local environment: 
+Example requirements and instruction to run on local environment: 
 
-* .NET Core 3.1,
+* .NET Core 3.1 SDK,
 * IIS Express (using Visual Studio)
 * SQL Server 
 * npm for Node.js
