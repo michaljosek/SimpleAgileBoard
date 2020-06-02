@@ -1,28 +1,16 @@
-// hello.test.js
-
-import React from "react";
-import { render, unmountComponentAtNode } from "react-dom";
-import { act } from "react-dom/test-utils";
+import '@testing-library/jest-dom/extend-expect';
+import React from 'react'
+import {render, fireEvent, screen, debug} from '@testing-library/react'
 
 import AddLaneModal from "../components/Lane/AddLaneModal";
 
-let container = null;
-beforeEach(() => {
-  // ustaw element DOM jako cel renderowania
-  container = document.createElement("div");
-  document.body.appendChild(container);
+test('when modal is closed then dialog should not be rendered', () => {
+  const {queryByTestId} = render(<AddLaneModal isAddLaneModalOpen={false} />)
+  expect(queryByTestId(/dialog/i)).toBeNull();
 });
 
-afterEach(() => {
-  // posprzątaj po zakończeniu
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
+test('when modal is closed then dialog should be rendered', () => {
+  render(<AddLaneModal isAddLaneModalOpen={true} />)
+  //getByRole throws exception when no found
+  expect(screen.getByRole('dialog')).toBeInTheDocument();
 });
-
-it("renders without a crash", () => {
-  act(() => {
-    render(<AddLaneModal />, container);
-  });
-});
-  

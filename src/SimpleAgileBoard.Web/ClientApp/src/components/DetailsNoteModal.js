@@ -31,17 +31,9 @@ const DetailsNoteModal = ({ isDetailsNoteModalOpen, detailsNoteModal, detailsNot
                 </div>
             </div>
         </form>
-        <button type="button" class="btn btn-primary right5" onClick={detailsNoteModal}>Close</button>
+        <button type="button" className="btn btn-primary right5" onClick={detailsNoteModal}>Close</button>
         
       </div>
   </Modal>
-
-
-
-DetailsNoteModal.propTypes = {
-    isDetailsNoteModalOpen: PropTypes.bool.isRequired,
-    detailsNoteModal: PropTypes.func.isRequired,
-    detailsNote: PropTypes.object.isRequired
-  }
 
 export default DetailsNoteModal;
