@@ -5,11 +5,11 @@ using System.Text;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SimpleAgileBoard.Application.Boards.Queries;
 using SimpleAgileBoard.Application.Boards.Services;
 using SimpleAgileBoard.Application.Common.Behaviours;
 using SimpleAgileBoard.Application.Lanes.Services;
 using SimpleAgileBoard.Application.Notes.Services;
+using SimpleAgileBoard.Application.User.Services;
 
 namespace SimpleAgileBoard.Application
 {
@@ -24,6 +24,8 @@ namespace SimpleAgileBoard.Application
             services.AddTransient<IBoardRepository, BoardRepository>();
             services.AddTransient<ILaneRepository, LaneRepository>();
             services.AddTransient<INoteRepository, NoteRepository>();
+
+            services.AddTransient<IUserManagerWrapper, UserManagerWrapper>();
             
             return services;
         }

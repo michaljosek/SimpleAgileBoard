@@ -5,11 +5,15 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAgileBoard.Web", "src\SimpleAgileBoard.Web\SimpleAgileBoard.Web.csproj", "{27926062-E168-4A8A-999E-58368E875A6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAgileBoard.Persistence", "src\SimpleAgileBoard.Persistence\SimpleAgileBoard.Persistence.csproj", "{86573F7A-914C-4EE0-8BDA-8E7FB589C979}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAgileBoard.Persistence", "src\SimpleAgileBoard.Persistence\SimpleAgileBoard.Persistence.csproj", "{86573F7A-914C-4EE0-8BDA-8E7FB589C979}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAgileBoard.Domain", "src\SimpleAgileBoard.Domain\SimpleAgileBoard.Domain.csproj", "{680C9D07-0243-42FF-977B-5054984AE34F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAgileBoard.Domain", "src\SimpleAgileBoard.Domain\SimpleAgileBoard.Domain.csproj", "{680C9D07-0243-42FF-977B-5054984AE34F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAgileBoard.Application", "src\SimpleAgileBoard.Application\SimpleAgileBoard.Application.csproj", "{B91D6B77-0F0F-43EE-8A5F-CF6C70A6A0E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAgileBoard.Application", "src\SimpleAgileBoard.Application\SimpleAgileBoard.Application.csproj", "{B91D6B77-0F0F-43EE-8A5F-CF6C70A6A0E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3FE5736A-9AD0-4EC6-80E7-AE3DCEB4655B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAgileBoard.Application.Tests", "tests\SimpleAgileBoard.Application.Tests\SimpleAgileBoard.Application.Tests.csproj", "{9DA18F7C-6EF9-444F-AD21-492D90ADD5FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +37,16 @@ Global
 		{B91D6B77-0F0F-43EE-8A5F-CF6C70A6A0E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B91D6B77-0F0F-43EE-8A5F-CF6C70A6A0E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B91D6B77-0F0F-43EE-8A5F-CF6C70A6A0E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DA18F7C-6EF9-444F-AD21-492D90ADD5FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DA18F7C-6EF9-444F-AD21-492D90ADD5FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DA18F7C-6EF9-444F-AD21-492D90ADD5FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DA18F7C-6EF9-444F-AD21-492D90ADD5FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9DA18F7C-6EF9-444F-AD21-492D90ADD5FA} = {3FE5736A-9AD0-4EC6-80E7-AE3DCEB4655B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {802F3F5F-9811-4A46-9752-48C05705EFEB}

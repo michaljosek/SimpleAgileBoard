@@ -27,12 +27,13 @@ namespace SimpleAgileBoard.Application.Lanes.Commands.AddLane
             
             var lane = new Lane
             {
-                Name = request.Name
+                Name = request.Name,
+                SortIndex = board.Lanes.Count
             };
 
-            //service
             board.Lanes.Add(lane);
-            await _boardRepository.SaveChanges(cancellationToken);
+            await _boardRepository.Update(board, cancellationToken);
+            board = await _boardRepository.Get(board.Id, cancellationToken);
 
             return new BoardViewModel
             {

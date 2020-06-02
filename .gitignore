@@ -14,3 +14,5 @@
 /.idea/.idea.SimpleAgileBoard/.idea/projectSettingsUpdater.xml
 /.idea/.idea.SimpleAgileBoard/riderModule.iml
 /.idea/.idea.SimpleAgileBoard/.idea/vcs.xml
+/tests/SimpleAgileBoard.Application.Tests/obj
+/tests/SimpleAgileBoard.Application.Tests/bin
