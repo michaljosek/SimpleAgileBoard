@@ -9,7 +9,7 @@ Requirements to run on local environment:
 
 Change connection string in "appsettings.json" which is in SimpleAgileBoard.Web project to your local SQL Server instance:
 
-    "DefaultConnection": "Server=DESKTOP-4T4ATPF\\LOCALHOST;Database=SimpleAgileBoard;Integrated Security=True;"
+    "DefaultConnection": "Server=localhost;Database=SimpleAgileBoard;Integrated Security=True;"
 
 Install dotnet ef through PowerShell
 
