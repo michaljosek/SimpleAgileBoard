@@ -1,6 +1,5 @@
 import React from 'react';
 import Modal from "react-modal"
-import PropTypes from 'prop-types';
 
 const EditBoardModal = ({ isEditBoardModalOpen, editBoardModal, editBoard, editBoardUpdate }) =>
   <Modal
@@ -12,17 +11,17 @@ const EditBoardModal = ({ isEditBoardModalOpen, editBoardModal, editBoard, editB
   >
       <div>
         <form>
-            <input id="formEditBoardBoardId" defaultValue={editBoard.id} hidden />
+            <input id="formEditBoardBoardId" defaultValue={editBoard && editBoard.id} hidden />
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">Name</label>
                 <div className="col-sm-10">
-                    <input id="formEditBoardName" className="form-control" type="text" defaultValue={editBoard.name} />
+                    <input id="formEditBoardName" className="form-control" type="text" defaultValue={editBoard && editBoard.name} />
                 </div>
             </div>
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">Note Prefix</label>
                 <div className="col-sm-10">
-                    <input id="formEditBoardNotePrefix" className="form-control" type="text" defaultValue={editBoard.notePrefix} />
+                    <input id="formEditBoardNotePrefix" className="form-control" type="text" defaultValue={editBoard && editBoard.notePrefix} />
                 </div>
             </div>
             <button type="button" className="btn btn-primary right5" onClick={editBoardUpdate}>Edit</button>
@@ -30,12 +29,5 @@ const EditBoardModal = ({ isEditBoardModalOpen, editBoardModal, editBoard, editB
         </form>        
       </div>    
   </Modal>
-
-EditBoardModal.propTypes = {
-    isEditBoardModalOpen: PropTypes.bool.isRequired,
-    editBoardModal: PropTypes.func.isRequired,
-    editBoard: PropTypes.object.isRequired,
-    editBoardUpdate: PropTypes.func.isRequired
-  }
 
 export default EditBoardModal;
